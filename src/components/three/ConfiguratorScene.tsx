@@ -146,10 +146,13 @@ export function ConfiguratorScene({ material, color, geometry }: ConfiguratorSce
   // Apply env map to material
   useEffect(() => {
     if (meshRef.current) {
-      const mat = meshRef.current.material as THREE.MeshPhysicalMaterial;
-      mat.envMap = envMap;
-      mat.envMapIntensity = material === "glass" ? 1.5 : 1;
-      mat.needsUpdate = true;
+      const mesh = meshRef.current.children[0] as THREE.Mesh;
+      if (mesh?.material) {
+        const mat = mesh.material as THREE.MeshPhysicalMaterial;
+        mat.envMap = envMap;
+        mat.envMapIntensity = material === "glass" ? 1.5 : 1;
+        mat.needsUpdate = true;
+      }
     }
   }, [envMap, material]);
 

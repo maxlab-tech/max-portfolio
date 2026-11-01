@@ -193,7 +193,7 @@ export function HeroScene() {
   }, []);
 
   // Animation loop - proper useFrame signature
-  useFrame((_state: unknown, delta: number) => {
+  useFrame((state, delta) => {
     timeRef.current += delta;
     const t = timeRef.current;
     const scroll = scrollProgressRef.current;

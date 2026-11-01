@@ -79,8 +79,8 @@ export default function Hero() {
         repeat: -1,
       });
 
-      // Glow pulse
-      gsap.to(".glow-pulse", {
+      // CTA glow pulse
+      gsap.to(".glow-border", {
         boxShadow: "0 0 40px rgba(0, 212, 170, 0.4), 0 0 80px rgba(0, 212, 170, 0.2)",
         duration: 2,
         ease: "sine.inOut",

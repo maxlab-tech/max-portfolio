@@ -105,20 +105,6 @@ export default function Process() {
           scrub: 1,
         },
       });
-
-      // Counter animation
-      gsap.to(".step-counter", {
-        textContent: 4,
-        duration: 1,
-        snap: { textContent: 1 },
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "+=300%",
-          scrub: 1,
-        },
-      });
     }, sectionRef);
 
     return () => ctx.revert();
