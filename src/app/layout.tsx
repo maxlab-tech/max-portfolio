@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     siteName: "maxlab",
     images: [
       {
-        url: "/og-image.png",
+        url: "/max-portfolio/og-image.png",
         width: 1200,
         height: 630,
         alt: "maxlab — Interactive Launch Assets",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "maxlab — Interactive Launch Assets",
     description: "Persistent, interactive web experiences — 3D heroes, product configurators, scroll-driven stories.",
-    images: ["/og-image.png"],
+    images: ["/max-portfolio/og-image.png"],
     creator: "@maxlab",
   },
   verification: {
@@ -66,16 +66,17 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const basePath = "/max-portfolio";
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://maxlab.tech" />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="icon" href={`${basePath}/favicon.ico`} sizes="any" />
+        <link rel="icon" href={`${basePath}/favicon.svg`} type="image/svg+xml" />
+        <link rel="apple-touch-icon" href={`${basePath}/apple-touch-icon.png`} />
+        <link rel="manifest" href={`${basePath}/site.webmanifest`} />
       </head>
       <body className="min-h-screen bg-background text-foreground antialiased">
         <main>{children}</main>
