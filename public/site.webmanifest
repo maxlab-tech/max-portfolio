@@ -9,18 +9,18 @@
   "theme_color": "#00d4aa",
   "icons": [
     {
-      "src": "/favicon.svg",
+      "src": "/max-portfolio/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
     },
     {
-      "src": "/favicon.ico",
+      "src": "/max-portfolio/favicon.ico",
       "sizes": "48x48",
       "type": "image/x-icon"
     },
     {
-      "src": "/apple-touch-icon.png",
+      "src": "/max-portfolio/apple-touch-icon.png",
       "sizes": "180x180",
       "type": "image/png",
       "purpose": "any maskable"

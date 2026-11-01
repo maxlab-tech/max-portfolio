@@ -103,7 +103,18 @@ export function ConfiguratorScene({ material, color, geometry }: ConfiguratorSce
 
   // Environment map for reflections
   const envMap = useMemo(() => {
-    const pmremGenerator = new THREE.PMREMGenerator(useThree().gl);
+    // We'll get gl from useThree in useEffect instead
+    return null;
+  }, []);
+
+  // Create envMap after we have access to gl
+  const envMapRef = useRef<THREE.Texture | null>(null);
+  const { gl } = useThree();
+
+  useEffect(() => {
+    if (envMapRef.current) return; // already created
+    
+    const pmremGenerator = new THREE.PMREMGenerator(gl);
     const scene = new THREE.Scene();
     
     // Simple gradient environment
@@ -140,21 +151,21 @@ export function ConfiguratorScene({ material, color, geometry }: ConfiguratorSce
     
     const renderTarget = pmremGenerator.fromScene(scene);
     pmremGenerator.dispose();
-    return renderTarget.texture;
-  }, []);
+    envMapRef.current = renderTarget.texture;
+  }, [gl]);
 
   // Apply env map to material
   useEffect(() => {
-    if (meshRef.current) {
+    if (meshRef.current && envMapRef.current) {
       const mesh = meshRef.current.children[0] as THREE.Mesh;
       if (mesh?.material) {
         const mat = mesh.material as THREE.MeshPhysicalMaterial;
-        mat.envMap = envMap;
+        mat.envMap = envMapRef.current;
         mat.envMapIntensity = material === "glass" ? 1.5 : 1;
         mat.needsUpdate = true;
       }
     }
-  }, [envMap, material]);
+  }, [envMapRef.current, material]);
 
   // Mouse interaction handlers
   useEffect(() => {
