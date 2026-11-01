@@ -1,0 +1,34 @@
+1:"LoadingBoundaryProvider"
+2:I[7121,[],"$1"]
+3:"static/chunks/c15bf2b0-182b384b62e205ff.js"
+4:"static/chunks/911-71980c694783976a.js"
+5:"static/chunks/app/loading-fa51ba9668877e3f.js"
+6:I[1009,["592","$3","911","$4","209","$5"],"default"]
+7:"$Sreact.fragment"
+8:I[7121,[],""]
+9:I[4581,[],""]
+a:"static/chunks/500-fc3b64d9ff4a32a7.js"
+b:"static/chunks/app/not-found-07873c91360ea4da.js"
+c:I[7145,["592","$3","911","$4","500","$a","345","$b"],"default"]
+e:I[1304,[],"ClientPageRoot"]
+f:"static/chunks/255-f8eafe6affe8f656.js"
+10:"static/chunks/app/page-68dd81d4b23b5f06.js"
+11:I[4672,["592","$3","911","$4","500","$a","255","$f","974","$10"],"default"]
+14:I[484,[],"OutletBoundary"]
+15:"$Sreact.suspense"
+17:"ViewportBoundary"
+18:I[484,[],"$17"]
+1a:"MetadataBoundary"
+1b:I[484,[],"$1a"]
+1d:I[7123,[],"default",1]
+:HL["/max-portfolio/_next/static/media/22a5144ee8d83bca-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/max-portfolio/_next/static/media/7d4881bb7e1bf84d-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/max-portfolio/_next/static/css/80e514d9725312b3.css","style"]
+d:[["children",{"s":"__PAGE__","h":512,"d":{"r":["$","$7","c",{"children":[["$","$Le",null,{"Component":"$11","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@12","$@13"]}}],null,["$","$L14",null,{"children":["$","$15",null,{"name":"Next.MetadataOutlet","children":"$@16"}]}]]}],"p":false,"v":null}}]]
+0:{"P":null,"c":["",""],"q":"","i":false,"t":{"t":{"s":"","h":532,"d":{"r":["$","$L2",null,{"loading":[["$","$L6","l",{}],[],null],"children":["$","$7","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/max-portfolio/_next/static/css/80e514d9725312b3.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"en","className":"__variable_f5fd32 __variable_023c6c","children":[["$","head",null,{"children":[["$","link",null,{"rel":"preconnect","href":"https://fonts.googleapis.com"}],["$","link",null,{"rel":"preconnect","href":"https://fonts.gstatic.com","crossOrigin":"anonymous"}],["$","link",null,{"rel":"dns-prefetch","href":"https://maxlab.tech"}],["$","link",null,{"rel":"icon","href":"/max-portfolio/favicon.ico","sizes":"any"}],["$","link",null,{"rel":"icon","href":"/max-portfolio/favicon.svg","type":"image/svg+xml"}],["$","link",null,{"rel":"apple-touch-icon","href":"/max-portfolio/apple-touch-icon.png"}],["$","link",null,{"rel":"manifest","href":"/max-portfolio/site.webmanifest"}]]}],["$","body",null,{"className":"min-h-screen bg-background text-foreground antialiased","children":["$","main",null,{"children":["$","$L8",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L9",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[["$","$Lc",null,{}],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]}]]}]]}]}],"p":false,"v":null},"c":"$Qd"},"h":{"r":["$","$7","h",{"children":[null,["$","$L18",null,{"children":"$L19"}],["$","$L1b",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$15",null,{"name":"Next.Metadata","children":"$L1c"}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":false,"v":null}},"m":"$undefined","G":["$1d",[]],"S":true,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"8N8_DunoZRCZ5hGAhAZ0B"}
+12:{}
+13:"$d:0:1:d:r:props:children:0:props:serverProvidedParams:params"
+19:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1, maximum-scale=5"}],["$","meta","2",{"name":"theme-color","content":"#050508","media":"(prefers-color-scheme: light)"}],["$","meta","3",{"name":"theme-color","content":"#050508","media":"(prefers-color-scheme: dark)"}]]
+1e:I[6869,[],"IconMark"]
+16:null
+1c:[["$","title","0",{"children":"maxlab — Interactive Launch Assets That Live & Evolve"}],["$","meta","1",{"name":"description","content":"Persistent, interactive web experiences — 3D heroes, product configurators, scroll-driven stories. Built with React, GSAP & Three.js. Fixed scope. Fixed price. Delivered in 10–21 days."}],["$","meta","2",{"name":"author","content":"Max Lab"}],["$","meta","3",{"name":"keywords","content":"interactive web,3D hero,product configurator,GSAP,Three.js,React,launch assets,creative development"}],["$","meta","4",{"name":"creator","content":"Max Lab"}],["$","meta","5",{"name":"publisher","content":"maxlab.tech"}],["$","meta","6",{"name":"robots","content":"index, follow"}],["$","meta","7",{"property":"og:title","content":"maxlab — Interactive Launch Assets That Live & Evolve"}],["$","meta","8",{"property":"og:description","content":"Persistent, interactive web experiences — 3D heroes, product configurators, scroll-driven stories. Fixed scope. Fixed price."}],["$","meta","9",{"property":"og:url","content":"https://maxlab-tech.github.io/max-portfolio"}],["$","meta","10",{"property":"og:site_name","content":"maxlab"}],["$","meta","11",{"property":"og:locale","content":"en_US"}],["$","meta","12",{"property":"og:image","content":"https://maxlab-tech.github.io/max-portfolio/og-image.png"}],["$","meta","13",{"property":"og:image:width","content":"1200"}],["$","meta","14",{"property":"og:image:height","content":"630"}],["$","meta","15",{"property":"og:image:alt","content":"maxlab — Interactive Launch Assets"}],["$","meta","16",{"property":"og:type","content":"website"}],["$","meta","17",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","18",{"name":"twitter:creator","content":"@maxlab"}],["$","meta","19",{"name":"twitter:title","content":"maxlab — Interactive Launch Assets"}],["$","meta","20",{"name":"twitter:description","content":"Persistent, interactive web experiences — 3D heroes, product configurators, scroll-driven stories."}],["$","meta","21",{"name":"twitter:image","content":"https://maxlab-tech.github.io/max-portfolio/og-image.png"}],["$","link","22",{"rel":"icon","href":"/max-portfolio/favicon.ico?7161ee1d105bc9c7","type":"image/x-icon","sizes":"48x48"}],["$","$L1e","23",{}]]
