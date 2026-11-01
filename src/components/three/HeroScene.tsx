@@ -9,7 +9,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 export function HeroScene() {
-  const { camera, viewport } = useThree();
+  const { camera } = useThree();
   const scrollProgressRef = useRef(0);
   const timeRef = useRef(0);
   const meshRef = useRef<THREE.Group>(null);
@@ -120,7 +120,6 @@ export function HeroScene() {
           float dist = length(gl_PointCoord - 0.5);
           float alpha = 1.0 - smoothstep(0.0, 0.5, dist);
           alpha *= vAlpha;
-          // Pulse
           alpha *= 0.5 + 0.5 * sin(uTime * vSpeed + vOffset);
           gl_FragColor = vec4(0.0, 0.83, 0.67, alpha);
         }
@@ -193,8 +192,8 @@ export function HeroScene() {
     return () => ScrollTrigger.getAll().forEach(t => t.kill());
   }, []);
 
-  // Animation loop
-  useFrame((state: { delta: number }, delta: number) => {
+  // Animation loop - proper useFrame signature
+  useFrame((_state, delta: number) => {
     timeRef.current += delta;
     const t = timeRef.current;
     const scroll = scrollProgressRef.current;
@@ -220,19 +219,22 @@ export function HeroScene() {
     if (ringRef.current) {
       ringRef.current.rotation.x = Math.PI / 2 + t * 0.05;
       ringRef.current.rotation.y = t * 0.03;
-      ringRef.current.material.opacity = 0.4 * (1 - scroll * 0.5);
+      const ringMat = ringRef.current.material as THREE.MeshBasicMaterial;
+      ringMat.opacity = 0.4 * (1 - scroll * 0.5);
     }
 
     // Particles
     if (particlesRef.current) {
       particlesRef.current.rotation.y = t * 0.02;
       particlesRef.current.rotation.x = Math.sin(t * 0.3) * 0.1;
-      const uniforms = particlesRef.current.material as THREE.ShaderMaterial;
-      uniforms.uniforms.uTime.value = t;
+      const uniforms = (particlesRef.current.material as THREE.ShaderMaterial).uniforms;
+      uniforms.uTime.value = t;
       // Disperse on scroll
       const scale = 1 + scroll * 1.5;
       particlesRef.current.scale.setScalar(scale);
-      particlesRef.current.material.opacity = 1 - scroll * 0.7;
+      const particleMat = particlesRef.current.material as THREE.ShaderMaterial;
+      particleMat.uniforms.uTime.value = t;
+      particleMat.opacity = 1 - scroll * 0.7;
     }
 
     // Shards - orbit and disperse
@@ -291,7 +293,6 @@ export function HeroScene() {
       <instancedMesh
         ref={shardsRef}
         args={[shardGeometry, shardMaterial, shardCount]}
-        instanceColor
       />
     </>
   );

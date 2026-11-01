@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
+import Process from "@/components/sections/Process";
 import About from "@/components/sections/About";
 import Services from "@/components/sections/Services";
 import Work from "@/components/sections/Work";
@@ -44,6 +45,7 @@ export default function Home() {
       <Navigation />
       <main id="main-content" className="pt-16 md:pt-20">
         <Hero />
+        <Process />
         <About />
         <Services />
         <Work />
