@@ -1,0 +1,29 @@
+{
+  "name": "maxlab — Interactive Launch Assets",
+  "short_name": "maxlab",
+  "description": "Persistent, interactive web experiences — 3D heroes, product configurators, scroll-driven stories.",
+  "start_url": "/max-portfolio/",
+  "scope": "/max-portfolio/",
+  "display": "standalone",
+  "background_color": "#050508",
+  "theme_color": "#00d4aa",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
