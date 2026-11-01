@@ -94,7 +94,7 @@ export default function Hero() {
 
   return (
     <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Three.js Canvas */}
+      {/* Three.js Canvas - REAL WebGL */}
       <HeroCanvas />
 
       {/* Gradient Overlay */}
