@@ -1,0 +1,12 @@
+# robots.txt for maxlab.tech
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://maxlab.tech/sitemap.xml
+
+# Host
+Host: https://maxlab.tech
+
+# Crawl-delay (optional, be respectful)
+Crawl-delay: 10

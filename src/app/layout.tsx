@@ -1,0 +1,81 @@
+import type { Metadata, Viewport } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+
+const geistSans = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist-sans",
+  display: "swap",
+});
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  metadataBase: new URL("https://maxlab.tech"),
+  title: "maxlab — Interactive Launch Assets That Live & Evolve",
+  description: "Persistent, interactive web experiences — 3D heroes, product configurators, scroll-driven stories. Built with React, GSAP & Three.js. Fixed scope. Fixed price. Delivered in 10–21 days.",
+  keywords: ["interactive web", "3D hero", "product configurator", "GSAP", "Three.js", "React", "launch assets", "creative development"],
+  authors: [{ name: "Max Lab" }],
+  creator: "Max Lab",
+  publisher: "maxlab.tech",
+  robots: "index, follow",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://maxlab.tech",
+    title: "maxlab — Interactive Launch Assets That Live & Evolve",
+    description: "Persistent, interactive web experiences — 3D heroes, product configurators, scroll-driven stories. Fixed scope. Fixed price.",
+    siteName: "maxlab",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "maxlab — Interactive Launch Assets",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "maxlab — Interactive Launch Assets",
+    description: "Persistent, interactive web experiences — 3D heroes, product configurators, scroll-driven stories.",
+    images: ["/og-image.png"],
+    creator: "@maxlab",
+  },
+  verification: {
+    // Add verification tokens when available
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#050508" },
+    { media: "(prefers-color-scheme: dark)", color: "#050508" },
+  ],
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://maxlab.tech" />
+      </head>
+      <body className="min-h-screen bg-background text-foreground antialiased">
+        {children}
+      </body>
+    </html>
+  );
+}
