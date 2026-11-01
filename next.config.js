@@ -1,7 +1,10 @@
 /** @type {import('next').NextConfig} */
+const isGithubPages = process.env.GITHUB_PAGES === 'true';
 const nextConfig = {
   reactStrictMode: true,
   output: 'export',
+  assetPrefix: isGithubPages ? '/max-portfolio' : '',
+  basePath: isGithubPages ? '/max-portfolio' : '',
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
