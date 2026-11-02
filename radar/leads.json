@@ -1,13 +1,15 @@
 {
   "version": "1.0.0",
-  "updated_at": "2026-11-02T16:15:00Z",
+  "updated_at": "2026-11-02T10:09:28.721034+00:00",
   "pipeline": "iLander Autonomous Engine",
   "summary": {
     "total_leads": 3,
     "audited": 3,
     "pitch_prepared": 3,
     "outreach_pending": 3,
-    "target_daily_revenue": "$150/day"
+    "target_daily_revenue": "$150/day",
+    "pipeline_potential_value": "$2,600 USD",
+    "monthly_target": "$4,500 USD"
   },
   "leads": [
     {
