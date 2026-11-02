@@ -238,6 +238,7 @@ export default function ActivityFeed() {
 
   // Format time ago for client-side live updates
   const formatTimeAgo = (timestamp: number, defaultTimeAgo: string) => {
+    // Keep server and client initial render strictly identical to eliminate hydration mismatch (Error #418)
     if (!mounted) return defaultTimeAgo;
     const diff = Math.max(0, Date.now() - timestamp);
     const minutes = Math.floor(diff / 60000);

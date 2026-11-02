@@ -6,11 +6,12 @@ import { useEffect } from "react";
 if (typeof window !== "undefined") {
   const originalWarn = console.warn;
   console.warn = (...args: unknown[]) => {
-    const msg = args[0];
+    const msg = typeof args[0] === "string" ? args[0] : "";
     if (
-      typeof msg === "string" &&
-      (msg.includes("THREE.Clock: This module has been deprecated") ||
-        msg.includes("THREE.Clock"))
+      msg.includes("THREE.Clock: This module has been deprecated") ||
+      msg.includes("THREE.Clock") ||
+      msg.includes("using deprecated parameters for the initialization function") ||
+      msg.includes("feature_collector.js")
     ) {
       return;
     }
