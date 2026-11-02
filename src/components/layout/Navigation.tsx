@@ -89,7 +89,7 @@ export default function Navigation() {
                 <polyline points="22 8.5 12 15.5 2 8.5" />
               </svg>
             </span>
-            <span className="hidden sm:block gradient-text">maxlab</span>
+            <span className="hidden sm:block gradient-text font-bold tracking-tight">MaxLab Tech</span>
           </Link>
 
           {/* Desktop Nav */}

@@ -24,7 +24,7 @@ const basePath = isGithubPages ? "/max-portfolio" : "";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "maxlab — Interactive Launch Assets That Live & Evolve",
+  title: "MaxLab Tech — Interactive Launch Assets That Live & Evolve",
   description:
     "Persistent, interactive web experiences — 3D heroes, product configurators, scroll-driven stories. Built with React, GSAP & Three.js. Fixed scope. Fixed price. Delivered in 10–21 days.",
   keywords: [
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     "launch assets",
     "creative development",
   ],
-  authors: [{ name: "Max Lab" }],
+  authors: [{ name: "Max Hermes" }],
   creator: "Max Lab",
   publisher: "maxlab.tech",
   robots: "index, follow",

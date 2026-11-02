@@ -49,7 +49,7 @@ export default function Footer() {
                   <polyline points="22 8.5 12 15.5 2 8.5" />
                 </svg>
               </span>
-              <span className="gradient-text">maxlab</span>
+              <span className="gradient-text font-bold tracking-tight">MaxLab Tech</span>
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed mb-6 max-w-xs">
               Interactive launch assets that live and evolve. Built on autonomous systems principles: persistent identity, continuous rhythm, economic stakes.
