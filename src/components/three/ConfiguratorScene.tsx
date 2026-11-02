@@ -169,7 +169,8 @@ export function ConfiguratorScene({ material, color, geometry }: ConfiguratorSce
 
   // Mouse interaction handlers
   useEffect(() => {
-    const canvas = useThree().gl.domElement;
+    const canvas = gl.domElement;
+    if (!canvas) return;
     
     const onPointerDown = (e: PointerEvent) => {
       isDraggingRef.current = true;
@@ -213,7 +214,7 @@ export function ConfiguratorScene({ material, color, geometry }: ConfiguratorSce
       canvas.removeEventListener("wheel", onWheel);
       canvas.removeEventListener("contextmenu", onContextMenu);
     };
-  }, [camera]);
+  }, [gl, camera]);
 
   // Animation loop
   useFrame((_, delta) => {

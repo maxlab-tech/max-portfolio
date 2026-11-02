@@ -86,8 +86,8 @@ export default function ConfiguratorCanvas({
           </div>
         </div>
 
-        {/* Wireframe toggle */}
-        <div className="absolute top-4 right-4 pointer-events-auto">
+        {/* Wireframe toggle (positioned top-left to avoid colliding with Live Preview badge on top-right) */}
+        <div className="absolute top-4 left-4 pointer-events-auto">
           <label className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass border border-border/50 text-sm text-foreground cursor-pointer hover:border-accent/50 transition-colors">
             <input type="checkbox" className="w-4 h-4 accent-accent" />
             <span>Wireframe</span>
