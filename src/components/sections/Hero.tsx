@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 // Only load HeroCanvas on client-side to avoid SSG hydration errors
 const HeroCanvas = dynamic(
   () => import("@/components/three/HeroCanvas").then((mod) => mod.default),
-  { ssr: false, loading: () => <div className="fixed inset-0 z-0 w-full h-full" /> }
+  { ssr: false, loading: () => <div className="absolute inset-0 z-0 w-full h-full" /> }
 );
 
 export default function Hero() {

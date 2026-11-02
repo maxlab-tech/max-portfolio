@@ -2,6 +2,7 @@
 
 import { Canvas } from "@react-three/fiber";
 import { HeroScene } from "./HeroScene";
+import { CanvasErrorBoundary } from "./CanvasErrorBoundary";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
@@ -40,16 +41,18 @@ export default function HeroCanvas() {
   return (
     <div
       ref={canvasRef}
-      className="fixed inset-0 z-0 w-full h-full pointer-events-none overflow-hidden"
+      className="absolute inset-0 z-0 w-full h-full pointer-events-none overflow-hidden"
       style={{ touchAction: "none" }}
     >
-      <Canvas
-        camera={{ position: [0, 0, 5], fov: 50 }}
-        gl={{ antialias: true, alpha: true, preserveDrawingBuffer: false }}
-        style={{ touchAction: "none" }}
-      >
-        <HeroScene />
-      </Canvas>
+      <CanvasErrorBoundary>
+        <Canvas
+          camera={{ position: [0, 0, 5], fov: 50 }}
+          gl={{ antialias: true, alpha: true, preserveDrawingBuffer: false }}
+          style={{ touchAction: "none" }}
+        >
+          <HeroScene />
+        </Canvas>
+      </CanvasErrorBoundary>
     </div>
   );
 }

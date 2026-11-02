@@ -2,6 +2,7 @@
 
 import { Canvas } from "@react-three/fiber";
 import { ConfiguratorScene } from "./ConfiguratorScene";
+import { CanvasErrorBoundary } from "./CanvasErrorBoundary";
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -60,17 +61,19 @@ export default function ConfiguratorCanvas({
         onPointerUp={onPointerUp}
         onPointerLeave={onPointerLeave}
       >
-        <Canvas
-          camera={{ position: [0, 0, 4], fov: 45 }}
-          gl={{ antialias: true, alpha: true, preserveDrawingBuffer: false }}
-          style={{ width: "100%", height: "100%", touchAction: "none" }}
-        >
-          <ConfiguratorScene
-            material={material}
-            color={color}
-            geometry={geometry}
-          />
-        </Canvas>
+        <CanvasErrorBoundary>
+          <Canvas
+            camera={{ position: [0, 0, 4], fov: 45 }}
+            gl={{ antialias: true, alpha: true, preserveDrawingBuffer: false }}
+            style={{ width: "100%", height: "100%", touchAction: "none" }}
+          >
+            <ConfiguratorScene
+              material={material}
+              color={color}
+              geometry={geometry}
+            />
+          </Canvas>
+        </CanvasErrorBoundary>
 
         {/* Interaction hint */}
         <div className="absolute bottom-4 left-4 right-4 text-center pointer-events-none">

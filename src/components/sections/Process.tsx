@@ -72,38 +72,18 @@ export default function Process() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Pin the section
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "+=300%",
-        pin: true,
-        pinSpacing: true,
-        scrub: 1,
-        onUpdate: (self) => {
-          const progress = self.progress;
-          steps.forEach((_, i) => {
-            const stepProgress = Math.max(0, Math.min(1, (progress - i * 0.2) / 0.2));
-            const el = stepsRef.current[i];
-            if (el) {
-              el.style.setProperty("--progress", stepProgress.toString());
-              el.style.opacity = (0.3 + 0.7 * stepProgress).toString();
-              el.style.transform = `translateY(${(1 - stepProgress) * 40}px) scale(${0.95 + 0.05 * stepProgress})`;
-            }
-          });
-        },
-      });
-
-      // Timeline line animation
-      gsap.to(".timeline-progress", {
-        height: "100%",
-        ease: "none",
+      // Animate cards on scroll reveal
+      gsap.from(stepsRef.current, {
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top top",
-          end: "+=300%",
-          scrub: 1,
+          start: "top 75%",
+          toggleActions: "play none none reverse",
         },
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
       });
     }, sectionRef);
 
@@ -114,13 +94,11 @@ export default function Process() {
     <section
       ref={sectionRef}
       id="process"
-      className="relative w-full min-h-screen bg-background"
-      style={{ background: "var(--background)" }}
+      className="relative w-full min-h-screen py-24 px-6 flex flex-col items-center justify-center bg-background"
     >
-      {/* Fixed Content */}
-      <div className="fixed top-0 left-0 right-0 bottom-0 z-10 flex flex-col items-center justify-center p-6 pointer-events-none">
+      <div className="w-full max-w-6xl mx-auto flex flex-col items-center justify-center">
         {/* Header */}
-        <div className="text-center mb-16 max-w-2xl" style={{ pointerEvents: "auto" }}>
+        <div className="text-center mb-16 max-w-2xl">
           <span className="inline-block px-4 py-1.5 rounded-full glass border-accent/30 text-accent text-sm font-medium mb-6">
             How We Work
           </span>
@@ -133,29 +111,18 @@ export default function Process() {
         </div>
 
         {/* Steps Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl" style={{ pointerEvents: "auto" }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
           {steps.map((step, i) => (
             <div
               key={step.number}
-              ref={(el) => { stepsRef.current[i] = el!; }}
+              ref={(el) => { if (el) stepsRef.current[i] = el; }}
               className="relative group step-card"
-              style={{
-                position: "relative",
-                willChange: "transform, opacity",
-              }}
             >
-              {/* Timeline connector */}
-              {i < steps.length - 1 && (
-                <div className="absolute left-1/2 top-full bottom-0 w-0.5 -translate-x-1/2 pointer-events-none">
-                  <div className="timeline-progress h-0 rounded-full" style={{ background: step.color }} />
-                </div>
-              )}
-
               {/* Step Card */}
-              <div className="relative glass rounded-2xl p-8 border border-border/50 h-full flex flex-col transition-all duration-500">
+              <div className="relative glass rounded-2xl p-8 border border-border/50 h-full flex flex-col transition-all duration-500 hover:border-accent/40">
                 {/* Number */}
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="text-3xl md:text-4xl font-bold text-foreground/10" style={{ color: step.color }}>
+                  <div className="text-3xl md:text-4xl font-bold" style={{ color: step.color }}>
                     {step.number}
                   </div>
                   <div className="w-full h-px bg-gradient-to-r" style={{ background: `linear-gradient(90deg, ${step.color}, transparent)` }} />
@@ -174,21 +141,13 @@ export default function Process() {
 
                 {/* Description */}
                 <p className="text-muted-foreground leading-relaxed flex-1">{step.description}</p>
-
-                {/* Progress indicator */}
-                <div className="mt-6 h-1 rounded-full bg-border/50 overflow-hidden">
-                  <div className="h-full rounded-full transition-all duration-300" style={{ 
-                    background: step.color,
-                    width: "var(--progress, 0%)"
-                  }} />
-                </div>
               </div>
             </div>
           ))}
         </div>
 
         {/* Footer Stats */}
-        <div className="mt-16 flex flex-wrap items-center justify-center gap-8 text-center" style={{ pointerEvents: "auto" }}>
+        <div className="mt-16 flex flex-wrap items-center justify-center gap-8 text-center">
           <div>
             <div className="text-3xl md:text-4xl font-bold gradient-text">10–21</div>
             <div className="text-sm text-muted-foreground">Days</div>
@@ -205,9 +164,6 @@ export default function Process() {
           </div>
         </div>
       </div>
-
-      {/* Scroll spacer for pinning */}
-      <div className="h-[300vh] w-full" />
     </section>
   );
 }

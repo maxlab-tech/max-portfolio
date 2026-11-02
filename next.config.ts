@@ -12,7 +12,7 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   experimental: {
-    optimizePackageImports: ["gsap", "@react-three/fiber", "@react-three/drei", "three"],
+    optimizePackageImports: ["gsap", "three"],
   },
   webpack: (config, { isServer }) => {
     config.resolve.alias = {
