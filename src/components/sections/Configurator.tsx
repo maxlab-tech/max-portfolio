@@ -119,9 +119,9 @@ export default function Configurator() {
     <section
       ref={canvasRef}
       id="configurator"
-      className="relative w-full min-h-[100vh] bg-background py-20 md:py-32"
+      className="relative w-full min-h-[100vh] bg-background py-20 md:py-32 overflow-hidden"
     >
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
         {/* Header */}
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-1.5 rounded-full glass border-accent/30 text-accent text-sm font-medium mb-6">
@@ -137,19 +137,21 @@ export default function Configurator() {
         </div>
 
         {/* Main Layout */}
-        <div className="grid lg:grid-cols-[1fr_420px] gap-12 items-start">
+        <div className="grid lg:grid-cols-[1fr_420px] gap-8 lg:gap-12 items-start w-full max-w-full">
           {/* 3D Viewport */}
-          <ConfiguratorCanvas
-            material={material}
-            color={color}
-            geometry={geometry}
-            onPointerDown={handleCanvasPointerDown}
-            onPointerUp={handleCanvasPointerUp}
-            onPointerLeave={handleCanvasPointerLeave}
-          />
+          <div className="w-full max-w-full overflow-hidden">
+            <ConfiguratorCanvas
+              material={material}
+              color={color}
+              geometry={geometry}
+              onPointerDown={handleCanvasPointerDown}
+              onPointerUp={handleCanvasPointerUp}
+              onPointerLeave={handleCanvasPointerLeave}
+            />
+          </div>
 
           {/* Controls Panel */}
-          <div className="space-y-8">
+          <div className="space-y-8 w-full max-w-full">
             {/* Material */}
             <ConfigPanel
               title="Material"
@@ -194,8 +196,10 @@ export default function Configurator() {
               options={GEOMETRIES}
               selected={geometry}
               onSelect={setGeometry}
+              gridClass="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full"
               renderOption={(opt) => (
                 <button
+                  type="button"
                   className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all w-full text-left ${
                     geometry === opt.id
                       ? "bg-accent/10 border-accent text-accent"
@@ -211,7 +215,7 @@ export default function Configurator() {
             />
 
             {/* Price Summary */}
-            <div className="glass rounded-2xl p-6 border border-border/50">
+            <div className="glass rounded-2xl p-6 border border-border/50 w-full">
               <div className="flex items-baseline justify-between mb-2">
                 <span className="text-sm text-muted-foreground">Estimated Project</span>
                 <span className="text-3xl font-bold gradient-text price-counter">$3,500</span>
@@ -219,22 +223,36 @@ export default function Configurator() {
               <div className="text-xs text-muted-foreground mb-4">
                 Includes: 3D model, 3 materials, 6 colors, interactions, embed code
               </div>
-              <div className="grid grid-cols-3 gap-4 text-center">
-                <div className="p-3 rounded-xl glass border border-border/50">
-                  <div className="text-xl font-bold text-accent">10–14</div>
+              <div className="grid grid-cols-3 gap-2 sm:gap-4 text-center">
+                <div className="p-2 sm:p-3 rounded-xl glass border border-border/50">
+                  <div className="text-lg sm:text-xl font-bold text-accent">10–14</div>
                   <div className="text-xs text-muted-foreground">Days</div>
                 </div>
-                <div className="p-3 rounded-xl glass border border-border/50">
-                  <div className="text-xl font-bold text-accent">2</div>
+                <div className="p-2 sm:p-3 rounded-xl glass border border-border/50">
+                  <div className="text-lg sm:text-xl font-bold text-accent">2</div>
                   <div className="text-xs text-muted-foreground">Revisions</div>
                 </div>
-                <div className="p-3 rounded-xl glass border border-border/50">
-                  <div className="text-xl font-bold text-accent">100%</div>
+                <div className="p-2 sm:p-3 rounded-xl glass border border-border/50">
+                  <div className="text-lg sm:text-xl font-bold text-accent">100%</div>
                   <div className="text-xs text-muted-foreground">Ownership</div>
                 </div>
               </div>
-              <button className="w-full mt-6 px-6 py-3 rounded-xl bg-accent text-background font-semibold hover:opacity-90 transition-opacity">
-                Start This Project
+              <button
+                type="button"
+                onClick={() => {
+                  const basePrice = 3500;
+                  const materialMultiplier = material === "glass" ? 1.3 : material === "metallic" ? 1.2 : 1;
+                  const geometryMultiplier = geometry === "torusKnot" ? 1.15 : 1;
+                  const price = Math.round(basePrice * materialMultiplier * geometryMultiplier);
+                  const subject = encodeURIComponent(`Start Project — 3D Product Configurator ($${price.toLocaleString()})`);
+                  const body = encodeURIComponent(
+                    `Hi Max,\n\nI want to start a 3D Product Configurator project based on my customized configuration:\n\n- Material: ${material}\n- Color: ${color}\n- Geometry: ${geometry}\n- Estimated Price: $${price.toLocaleString()}\n- Delivery Timeline: 10–14 Days\n\nPlease let me know the scope definition and kickoff steps!\n\nBest regards,`
+                  );
+                  window.location.href = `mailto:maxlab.studio@agentmail.to?subject=${subject}&body=${body}`;
+                }}
+                className="w-full mt-6 px-6 py-3.5 rounded-xl bg-accent text-background font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(0,212,170,0.3)] cursor-pointer"
+              >
+                Start This Project →
               </button>
             </div>
 
@@ -262,19 +280,21 @@ function ConfigPanel({
   selected,
   onSelect,
   renderOption,
+  gridClass = "flex flex-wrap gap-2",
 }: {
   title: string;
   options: ConfigOption[];
   selected: string;
   onSelect: (value: string) => void;
   renderOption: (opt: ConfigOption) => React.ReactNode;
+  gridClass?: string;
 }) {
   return (
-    <div className="config-panel glass rounded-2xl p-6 border border-border/50">
+    <div className="config-panel glass rounded-2xl p-6 border border-border/50 w-full overflow-hidden">
       <h3 className="text-sm font-semibold text-foreground/60 uppercase tracking-wider mb-4">
         {title}
       </h3>
-      <div className="flex flex-wrap gap-2">
+      <div className={gridClass}>
         {options.map((opt) => (
           <div
             key={opt.id}

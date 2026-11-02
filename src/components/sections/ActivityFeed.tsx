@@ -364,9 +364,11 @@ export default function ActivityFeed() {
               ))}
             </div>
             
-            <label className="flex items-center gap-2 text-sm text-muted-foreground cursor-pointer">
+            <label htmlFor="activity-live-checkbox" className="flex items-center gap-2 text-sm text-muted-foreground cursor-pointer">
               <input
+                id="activity-live-checkbox"
                 type="checkbox"
+                aria-label="Toggle Live Feed"
                 checked={liveMode}
                 onChange={(e) => setLiveMode(e.target.checked)}
                 className="w-4 h-4 accent-accent rounded border-border/50 bg-card"

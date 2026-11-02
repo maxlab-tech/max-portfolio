@@ -92,28 +92,33 @@ export default function ConfiguratorCanvas({
         </CanvasErrorBoundary>
 
         {/* Interaction hint */}
-        <div className="absolute bottom-4 left-4 right-4 text-center pointer-events-none">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-border/50 text-sm text-muted-foreground">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="animate-spin">
+        <div className="absolute bottom-4 left-4 right-4 text-center pointer-events-none z-10">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full glass border-border/50 text-xs sm:text-sm text-muted-foreground max-w-full">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="animate-spin flex-shrink-0">
               <circle cx="12" cy="12" r="10" strokeOpacity="0.3" />
               <path d="M12 2a10 10 0 0 1 10 10" strokeOpacity="1" />
             </svg>
-            Drag to rotate • Scroll to zoom • Right-click to pan
+            <span className="truncate">Drag to rotate • Scroll to zoom • Right-click to pan</span>
           </div>
         </div>
 
         {/* Wireframe toggle (positioned top-left to avoid colliding with Live Preview badge on top-right) */}
-        <div className="absolute top-4 left-4 pointer-events-auto">
-          <label className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass border border-border/50 text-sm text-foreground cursor-pointer hover:border-accent/50 transition-colors">
-            <input type="checkbox" className="w-4 h-4 accent-accent" />
+        <div className="absolute top-4 left-4 pointer-events-auto z-10">
+          <label htmlFor="configurator-wireframe-toggle" className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass border border-border/50 text-xs sm:text-sm text-foreground cursor-pointer hover:border-accent/50 transition-colors">
+            <input
+              id="configurator-wireframe-toggle"
+              type="checkbox"
+              aria-label="Toggle Wireframe mode"
+              className="w-4 h-4 accent-accent"
+            />
             <span>Wireframe</span>
           </label>
         </div>
       </div>
 
-      {/* Live badge */}
-      <div className="absolute -top-3 -right-3 md:top-4 md:right-4 pointer-events-none">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent/10 border border-accent/30 text-accent text-xs font-medium">
+      {/* Live badge (kept securely within container bounds to prevent overflow) */}
+      <div className="absolute top-4 right-4 pointer-events-none z-10">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent/10 border border-accent/30 text-accent text-xs font-medium backdrop-blur-sm">
           <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
           Live Preview
         </div>

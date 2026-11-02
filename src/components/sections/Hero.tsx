@@ -134,7 +134,7 @@ export default function Hero() {
           {/* CTA Buttons */}
           <div ref={ctaRef} className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
             <a
-              href="#contact"
+              href="mailto:maxlab.studio@agentmail.to?subject=Start%20a%20Project%20%E2%80%94%20Maxlab"
               className="group relative px-8 py-4 rounded-xl bg-accent text-background font-semibold text-lg overflow-hidden glow-border transition-all hover:scale-[1.02] hover:-translate-y-1"
             >
               <span className="relative z-10 flex items-center gap-2">
@@ -146,7 +146,7 @@ export default function Hero() {
             </a>
             <a
               href="#work"
-              className="px-8 py-4 rounded-xl border border-border text-foreground font-semibold text-lg hover:bg-card transition-all hover:border-accent/50"
+              className="px-8 py-4 rounded-xl glass border border-border/50 text-foreground font-semibold text-lg hover:border-accent/50 transition-colors"
             >
               View Work
             </a>

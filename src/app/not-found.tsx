@@ -40,12 +40,12 @@ export default function NotFound() {
           >
             Return to Base
           </Link>
-          <Link
-            href="#contact"
+          <a
+            href="mailto:maxlab.studio@agentmail.to?subject=Start%20a%20Project%20%E2%80%94%20Maxlab"
             className="px-6 py-3 rounded-xl border border-border text-foreground font-semibold hover:bg-card transition-colors"
           >
             Start a Project
-          </Link>
+          </a>
         </div>
       </div>
     </div>

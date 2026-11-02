@@ -78,13 +78,15 @@ export default function Contact() {
     e.preventDefault();
     setFormState("submitting");
 
-    // Simulate form submission - in production, this would send to an API
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    // For now, just show success
+    const subject = encodeURIComponent(`Start Project Inquiry: ${formData.projectType || "General"} from ${formData.name}`);
+    const body = encodeURIComponent(
+      `Hi Max,\n\nI want to start a project with Maxlab:\n\n- Name: ${formData.name}\n- Email: ${formData.email}\n- Package / Tier: ${formData.projectType || "Not specified"}\n- Budget Range: ${formData.budget || "Not specified"}\n- Desired Timeline: ${formData.timeline || "Not specified"}\n\nProject Brief & Requirements:\n${formData.message}\n\nLooking forward to your reply!`
+    );
+    window.location.href = `mailto:maxlab.studio@agentmail.to?subject=${subject}&body=${body}`;
+
+    await new Promise(resolve => setTimeout(resolve, 1000));
     setFormState("success");
     setFormData({ name: "", email: "", projectType: "", budget: "", timeline: "", message: "" });
-    
     setTimeout(() => setFormState("idle"), 5000);
   };
 
@@ -128,10 +130,12 @@ export default function Contact() {
             ) : (
               <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid sm:grid-cols-2 gap-6">
-                  <FormGroup label="Name" required>
+                  <FormGroup label="Name" htmlFor="contact-name" required>
                     <input
+                      id="contact-name"
                       type="text"
                       name="name"
+                      autoComplete="name"
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="Your name"
@@ -139,10 +143,12 @@ export default function Contact() {
                       required
                     />
                   </FormGroup>
-                  <FormGroup label="Email" required>
+                  <FormGroup label="Email" htmlFor="contact-email" required>
                     <input
+                      id="contact-email"
                       type="email"
                       name="email"
+                      autoComplete="email"
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="you@company.com"
@@ -153,8 +159,15 @@ export default function Contact() {
                 </div>
 
                 <div className="grid sm:grid-cols-2 gap-6">
-                  <FormGroup label="Project Tier" required>
-                    <select name="projectType" value={formData.projectType} onChange={handleChange} className="form-input" required>
+                  <FormGroup label="Project Tier" htmlFor="contact-project-type" required>
+                    <select
+                      id="contact-project-type"
+                      name="projectType"
+                      value={formData.projectType}
+                      onChange={handleChange}
+                      className="form-input"
+                      required
+                    >
                       <option value="">Select a tier</option>
                       <option value="launch">LAUNCH — $3,500 (10 days)</option>
                       <option value="launch-pro">LAUNCH PRO — $6,500 (14 days)</option>
@@ -162,8 +175,14 @@ export default function Contact() {
                       <option value="custom">Custom / Not Sure</option>
                     </select>
                   </FormGroup>
-                  <FormGroup label="Timeline">
-                    <select name="timeline" value={formData.timeline} onChange={handleChange} className="form-input">
+                  <FormGroup label="Timeline" htmlFor="contact-timeline">
+                    <select
+                      id="contact-timeline"
+                      name="timeline"
+                      value={formData.timeline}
+                      onChange={handleChange}
+                      className="form-input"
+                    >
                       <option value="">When do you need it?</option>
                       <option value="asap">ASAP</option>
                       <option value="2-weeks">2 weeks</option>
@@ -173,8 +192,14 @@ export default function Contact() {
                   </FormGroup>
                 </div>
 
-                <FormGroup label="Budget Range">
-                  <select name="budget" value={formData.budget} onChange={handleChange} className="form-input">
+                <FormGroup label="Budget Range" htmlFor="contact-budget">
+                  <select
+                    id="contact-budget"
+                    name="budget"
+                    value={formData.budget}
+                    onChange={handleChange}
+                    className="form-input"
+                  >
                     <option value="">Budget range (USD)</option>
                     <option value="3-5k">$3,000 – $5,000</option>
                     <option value="5-8k">$5,000 – $8,000</option>
@@ -184,8 +209,9 @@ export default function Contact() {
                   </select>
                 </FormGroup>
 
-                <FormGroup label="Project Details" required>
+                <FormGroup label="Project Details" htmlFor="contact-message" required>
                   <textarea
+                    id="contact-message"
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
@@ -214,6 +240,15 @@ export default function Contact() {
                 <p className="text-xs text-muted-foreground text-center">
                   By submitting, you agree to scope discussion before any payment. 50% deposit to begin, 50% on delivery.
                 </p>
+                <div className="pt-2 text-center">
+                  <span className="text-xs text-muted-foreground">Prefer direct email? </span>
+                  <a
+                    href="mailto:maxlab.studio@agentmail.to?subject=Direct%20Inquiry%20%E2%80%94%20Maxlab"
+                    className="text-xs text-accent hover:underline font-medium"
+                  >
+                    maxlab.studio@agentmail.to
+                  </a>
+                </div>
               </form>
             )}
           </div>
@@ -294,7 +329,7 @@ export default function Contact() {
                 Payment & Contract
               </h3>
               <div className="space-y-4 text-sm">
-                <p><strong>50% deposit</strong> to begin (via PayPal: <a href="mailto:tuwaidanmabedth@gmail.com" className="text-accent hover:underline">tuwaidanmabedth@gmail.com</a>)</p>
+                <p><strong>50% deposit</strong> to begin (invoice & details sent via: <a href="mailto:maxlab.studio@agentmail.to" className="text-accent hover:underline">maxlab.studio@agentmail.to</a>)</p>
                 <p><strong>50% on delivery</strong> before final repo handover</p>
                 <p><strong>Digital contract</strong> via DocuSign/HelloSign (handled by Mariabeth)</p>
                 <p><strong>Full IP ownership</strong> transfers to you on final payment</p>
@@ -308,10 +343,20 @@ export default function Contact() {
   );
 }
 
-function FormGroup({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
+function FormGroup({
+  label,
+  htmlFor,
+  required,
+  children,
+}: {
+  label: string;
+  htmlFor?: string;
+  required?: boolean;
+  children: React.ReactNode;
+}) {
   return (
     <div className="form-group">
-      <label className="block text-sm font-medium mb-2 flex items-center gap-1">
+      <label htmlFor={htmlFor} className="block text-sm font-medium mb-2 flex items-center gap-1">
         {label}
         {required && <span className="text-accent">*</span>}
       </label>

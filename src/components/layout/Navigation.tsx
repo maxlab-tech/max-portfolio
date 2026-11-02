@@ -104,12 +104,12 @@ export default function Navigation() {
               </Link>
             ))}
 
-            <Link
-              href="#contact"
+            <a
+              href="mailto:maxlab.studio@agentmail.to?subject=Start%20Project%20with%20Maxlab"
               className="cta-btn px-5 py-2.5 rounded-xl bg-accent text-background font-semibold text-sm hover:opacity-90 transition-opacity"
             >
               Start Project
-            </Link>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -148,13 +148,13 @@ export default function Navigation() {
                   {item.label}
                 </Link>
               ))}
-              <Link
-                href="#contact"
+              <a
+                href="mailto:maxlab.studio@agentmail.to?subject=Start%20Project%20with%20Maxlab"
                 className="px-4 py-3 rounded-xl bg-accent text-background font-semibold text-center"
                 onClick={() => setMobileOpen(false)}
               >
                 Start Project
-              </Link>
+              </a>
             </div>
           </div>
         )}

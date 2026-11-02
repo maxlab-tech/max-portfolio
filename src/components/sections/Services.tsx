@@ -234,14 +234,22 @@ function TierCard({ tier, isActive, onClick }: { tier: typeof tiers[0]; isActive
       </div>
 
       <button
-        onClick={(e) => { e.stopPropagation(); onClick(); }}
-        className={`w-full py-4 rounded-xl font-semibold text-lg transition-all ${
+        type="button"
+        onClick={(e) => {
+          e.stopPropagation();
+          const subject = encodeURIComponent(`Start ${tier.name} Project (${tier.price})`);
+          const body = encodeURIComponent(
+            `Hi Max,\n\nI want to get started with the ${tier.name} tier (${tier.price}, ${tier.timeline} delivery).\n\nProject brief:\n\nLooking forward to hearing from you!`
+          );
+          window.location.href = `mailto:maxlab.studio@agentmail.to?subject=${subject}&body=${body}`;
+        }}
+        className={`w-full py-4 rounded-xl font-semibold text-lg transition-all cursor-pointer ${
           isActive
-            ? "bg-accent text-background hover:opacity-90"
+            ? "bg-accent text-background hover:opacity-90 shadow-[0_0_20px_rgba(0,212,170,0.3)]"
             : "bg-card border border-border/50 text-foreground hover:border-accent/50"
         }`}
       >
-        {tier.cta}
+        {tier.cta} →
       </button>
     </article>
   );

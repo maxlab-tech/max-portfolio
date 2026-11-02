@@ -182,7 +182,7 @@ export default function Work() {
         {/* CTA */}
         <div className="text-center mt-20">
           <a
-            href="#contact"
+            href="mailto:maxlab.studio@agentmail.to?subject=Start%20Your%20Project%20%E2%80%94%20Maxlab"
             className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-accent text-background font-semibold text-lg hover:opacity-90 transition-opacity"
           >
             Start Your Project
