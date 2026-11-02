@@ -72,19 +72,24 @@ export default function Process() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Animate cards on scroll reveal
-      gsap.from(stepsRef.current, {
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
-          toggleActions: "play none none reverse",
-        },
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power3.out",
-      });
+      // Animate cards on scroll reveal cleanly without getting stuck in opacity 0
+      gsap.fromTo(
+        stepsRef.current,
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power2.out",
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
     }, sectionRef);
 
     return () => ctx.revert();

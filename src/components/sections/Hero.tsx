@@ -126,7 +126,7 @@ export default function Hero() {
           </h1>
 
           {/* Subtitle */}
-          <p ref={subtitleRef} className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto mb-12 leading-relaxed">
+          <p ref={subtitleRef} className="text-lg md:text-xl lg:text-2xl text-foreground/80 max-w-3xl mx-auto mb-12 leading-relaxed">
             Persistent, interactive web experiences — 3D heroes, product configurators, scroll-driven stories.
             Built with React, GSAP & Three.js. Fixed scope. Fixed price. Delivered in 10–21 days.
           </p>
