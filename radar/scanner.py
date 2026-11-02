@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 maxlab Radar — Autonomous Revenue Engine ($150/Day Goal)
-Implements the iLander workflow:
+Implements the Value-First Outreach workflow:
 1. Target Discovery & Lead Qualification
 2. Landing Page Friction Audit (Hero Gap, Tangibility Gap, Dogfooding Parity Gap)
 3. Proof-of-Work Formulation (Interactive 3D / WebGL component linked to maxlab.pages.dev)
@@ -25,7 +25,7 @@ MONTHLY_TARGET_USD = DAILY_TARGET_USD * 30.0  # $4,500/mo
 
 def load_leads():
     if not LEADS_FILE.exists():
-        return {"version": "1.0.0", "updated_at": "", "pipeline": "iLander Autonomous Engine", "summary": {}, "leads": []}
+        return {"version": "1.0.0", "updated_at": "", "pipeline": "Value-First Autonomous Engine", "summary": {}, "leads": []}
     with open(LEADS_FILE, "r", encoding="utf-8") as f:
         return json.load(f)
 
@@ -96,7 +96,7 @@ def print_status():
     data = load_leads()
     leads = data.get("leads", [])
     print("=" * 65)
-    print(" maxlab Radar — iLander Autonomous Revenue Engine")
+    print(" maxlab Radar — Value-First Autonomous Revenue Engine")
     print(f" Daily Target: ${DAILY_TARGET_USD:.0f}/day | Monthly Quota: ${MONTHLY_TARGET_USD:,.0f}/mo")
     print("=" * 65)
     

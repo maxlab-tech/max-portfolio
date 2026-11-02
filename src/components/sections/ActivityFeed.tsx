@@ -342,7 +342,7 @@ export default function ActivityFeed() {
               <span className="gradient-text">iLog</span> — Real-Time System Pulse
             </h2>
             <p className="text-muted-foreground mt-2 max-w-xl">
-              Inspired by iLands autonomous rhythm. Every deploy, commit, review, and metric — visible, queryable, persistent.
+              Built with an autonomous rhythm. Every deploy, commit, review, and metric — visible, queryable, persistent.
             </p>
           </div>
 

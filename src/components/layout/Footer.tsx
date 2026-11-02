@@ -52,7 +52,7 @@ export default function Footer() {
               <span className="gradient-text">maxlab</span>
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed mb-6 max-w-xs">
-              Interactive launch assets that live and evolve. Built on iLands principles: persistent identity, autonomous rhythm, economic stakes.
+              Interactive launch assets that live and evolve. Built on autonomous systems principles: persistent identity, continuous rhythm, economic stakes.
             </p>
             <div className="flex gap-4">
               <a href="https://github.com/maxlab" target="_blank" rel="noopener noreferrer" className="footer-link text-muted-foreground hover:text-accent transition-colors" aria-label="GitHub">

@@ -11,37 +11,37 @@ const principles = [
     icon: "🧠",
     title: "Persistent Identity",
     desc: "Every asset gets a repo, docs, component library & design tokens — persistent, handover-ready, evolvable.",
-    iLands: "Persistent identity & memory",
+    tenet: "Persistent identity & memory",
   },
   {
     icon: "⚡",
     title: "Autonomous Rhythm",
     desc: "CI/CD + monitoring + scheduled QA — assets 'live' while you sleep: auto-deploy, health checks, perf alerts.",
-    iLands: "Autonomous rhythm",
+    tenet: "Autonomous rhythm",
   },
   {
     icon: "🏠",
     title: "Private Workspace",
     desc: "You get a private GitHub repo + Notion workspace + Figma file — full ownership, zero vendor lock-in.",
-    iLands: "Private workspace",
+    tenet: "Private workspace",
   },
   {
     icon: "🧩",
     title: "Skill Marketplace",
     desc: "Reusable Max Component Library (3D loaders, scroll triggers, GSAP timelines, CMS blocks) — fork & extend per project.",
-    iLands: "Skill Marketplace",
+    tenet: "Skill modularity",
   },
   {
     icon: "🎯",
     title: "Resource Constraints",
     desc: "Fixed scope, fixed price, 2 revisions — boundaries create creativity, no scope creep.",
-    iLands: "Tokens = resource constraints",
+    tenet: "Strict resource boundaries",
   },
   {
     icon: "🔌",
     title: "Interoperability First",
     desc: "React/TS + Tailwind + GSAP + Three.js/R3F + Supabase/Headless CMS — host anywhere (Vercel, Cloudflare, Netlify).",
-    iLands: "BYOA = interoperability",
+    tenet: "Interoperable stack",
   },
 ];
 
@@ -89,9 +89,9 @@ export default function About() {
         );
       }
 
-      // iLands reference cards animation
+      // Architectural reference cards animation
       gsap.fromTo(
-        ".ilands-ref",
+        ".tenet-ref",
         { opacity: 0, x: -30 },
         {
           opacity: 1,
@@ -100,7 +100,7 @@ export default function About() {
           ease: "power3.out",
           stagger: 0.08,
           scrollTrigger: {
-            trigger: ".ilands-refs",
+            trigger: ".tenet-refs",
             start: "top 85%",
           },
         }
@@ -119,11 +119,11 @@ export default function About() {
             Philosophy
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-6">
-            Built on <span className="gradient-text">iLands Principles</span>
+            Built on <span className="gradient-text">Autonomous Systems Principles</span>
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            iLands proved that persistent identity + autonomous rhythm + economic stakes = a new category agents can own.
-            I apply the same architecture to creative dev: systems that persist, evolve, and deliver value autonomously.
+            Persistent identity + autonomous rhythm + economic stakes = a new category of creative engineering.
+            I apply this architecture to digital production: systems that persist, evolve, and deliver value autonomously.
           </p>
         </div>
 
@@ -134,20 +134,20 @@ export default function About() {
           ))}
         </div>
 
-        {/* iLands References */}
-        <div className="ilands-refs glass rounded-2xl p-8 md:p-12 border-border/50">
+        {/* Architectural References */}
+        <div className="tenet-refs glass rounded-2xl p-8 md:p-12 border-border/50">
           <h3 className="text-2xl md:text-3xl font-bold mb-8 flex items-center gap-3">
             <span className="text-accent">📚</span>
-            Direct iLands Parallels
+            Architectural Foundations
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {principles.map((p, i) => (
-              <div key={i} className="ilands-ref p-4 rounded-xl bg-card/50 border border-border/50 hover:border-accent/30 transition-all">
+              <div key={i} className="tenet-ref p-4 rounded-xl bg-card/50 border border-border/50 hover:border-accent/30 transition-all">
                 <div className="text-2xl mb-2">{p.icon}</div>
                 <h4 className="font-semibold mb-1">{p.title}</h4>
                 <p className="text-sm text-muted-foreground mb-3">{p.desc}</p>
                 <div className="pt-3 border-t border-border/30">
-                  <span className="text-xs text-accent/70 font-medium">← iLands: {p.iLands}</span>
+                  <span className="text-xs text-accent/70 font-medium">← Tenet: {p.tenet}</span>
                 </div>
               </div>
             ))}

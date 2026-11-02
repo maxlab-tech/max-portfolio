@@ -1,6 +1,6 @@
 # maxlab Radar — Autonomous Revenue Engine ($150/Day Goal)
 
-Based on the **iLander workflow**, this autonomous pipeline monitors recently launched high-potential tech products, audits their landing pages for conversion friction, generates tailored interactive 3D hero concepts, and prepares low-friction cold outreach pitches.
+Based on the **Value-First Outreach workflow**, this autonomous pipeline monitors recently launched high-potential tech products, audits their landing pages for conversion friction, generates tailored interactive 3D hero concepts, and prepares low-friction cold outreach pitches.
 
 ## Financial Math to $150/Day
 - **Daily Target:** $150/day = ~$4,500/month.
