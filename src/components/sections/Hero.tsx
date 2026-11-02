@@ -1,11 +1,17 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, Suspense } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import HeroCanvas from "@/components/three/HeroCanvas";
+import dynamic from "next/dynamic";
 
 gsap.registerPlugin(ScrollTrigger);
+
+// Only load HeroCanvas on client-side to avoid SSG hydration errors
+const HeroCanvas = dynamic(
+  () => import("@/components/three/HeroCanvas").then((mod) => mod.default),
+  { ssr: false, loading: () => <div className="fixed inset-0 z-0 w-full h-full" /> }
+);
 
 export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);

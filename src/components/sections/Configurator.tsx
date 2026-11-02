@@ -1,12 +1,18 @@
 "use client";
 
-import { Canvas } from "@react-three/fiber";
-import { ConfiguratorScene } from "@/components/three/ConfiguratorScene";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, Suspense } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import dynamic from "next/dynamic";
 
 gsap.registerPlugin(ScrollTrigger);
+
+// Only load ConfiguratorCanvas on client-side to avoid SSG hydration errors
+const ConfiguratorCanvas = dynamic(
+  () =>
+    import("@/components/three/ConfiguratorCanvas").then((mod) => mod.default),
+  { ssr: false, loading: () => <div className="aspect-square rounded-2xl glass border border-border/50" /> }
+);
 
 interface ConfigOption {
   id: string;
@@ -133,53 +139,14 @@ export default function Configurator() {
         {/* Main Layout */}
         <div className="grid lg:grid-cols-[1fr_420px] gap-12 items-start">
           {/* 3D Viewport */}
-          <div className="relative group">
-            <div
-              className="aspect-square rounded-2xl glass border border-border/50 overflow-hidden relative"
-              onPointerDown={handleCanvasPointerDown}
-              onPointerUp={handleCanvasPointerUp}
-              onPointerLeave={handleCanvasPointerLeave}
-            >
-              <Canvas
-                camera={{ position: [0, 0, 4], fov: 45 }}
-                gl={{ antialias: true, alpha: true, preserveDrawingBuffer: false }}
-                style={{ width: "100%", height: "100%", touchAction: "none" }}
-              >
-                <ConfiguratorScene
-                  material={material}
-                  color={color}
-                  geometry={geometry}
-                />
-              </Canvas>
-
-              {/* Interaction hint */}
-              <div className="absolute bottom-4 left-4 right-4 text-center pointer-events-none">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-border/50 text-sm text-muted-foreground">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="animate-spin">
-                    <circle cx="12" cy="12" r="10" strokeOpacity="0.3" />
-                    <path d="M12 2a10 10 0 0 1 10 10" strokeOpacity="1" />
-                  </svg>
-                  Drag to rotate • Scroll to zoom • Right-click to pan
-                </div>
-              </div>
-
-              {/* Wireframe toggle */}
-              <div className="absolute top-4 right-4 pointer-events-auto">
-                <label className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass border border-border/50 text-sm text-foreground cursor-pointer hover:border-accent/50 transition-colors">
-                  <input type="checkbox" className="w-4 h-4 accent-accent" />
-                  <span>Wireframe</span>
-                </label>
-              </div>
-            </div>
-
-            {/* Live badge */}
-            <div className="absolute -top-3 -right-3 md:top-4 md:right-4 pointer-events-none">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent/10 border border-accent/30 text-accent text-xs font-medium">
-                <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                Live Preview
-              </div>
-            </div>
-          </div>
+          <ConfiguratorCanvas
+            material={material}
+            color={color}
+            geometry={geometry}
+            onPointerDown={handleCanvasPointerDown}
+            onPointerUp={handleCanvasPointerUp}
+            onPointerLeave={handleCanvasPointerLeave}
+          />
 
           {/* Controls Panel */}
           <div className="space-y-8">

@@ -14,11 +14,28 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
+// Dynamic metadata base URL based on deployment environment
+const isGithubPages = process.env.GITHUB_PAGES === "true";
+const siteUrl = isGithubPages
+  ? "https://maxlab-tech.github.io/max-portfolio"
+  : "https://maxlab.tech";
+const basePath = isGithubPages ? "/max-portfolio" : "";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://maxlab.tech"),
+  metadataBase: new URL(siteUrl),
   title: "maxlab — Interactive Launch Assets That Live & Evolve",
-  description: "Persistent, interactive web experiences — 3D heroes, product configurators, scroll-driven stories. Built with React, GSAP & Three.js. Fixed scope. Fixed price. Delivered in 10–21 days.",
-  keywords: ["interactive web", "3D hero", "product configurator", "GSAP", "Three.js", "React", "launch assets", "creative development"],
+  description:
+    "Persistent, interactive web experiences — 3D heroes, product configurators, scroll-driven stories. Built with React, GSAP & Three.js. Fixed scope. Fixed price. Delivered in 10–21 days.",
+  keywords: [
+    "interactive web",
+    "3D hero",
+    "product configurator",
+    "GSAP",
+    "Three.js",
+    "React",
+    "launch assets",
+    "creative development",
+  ],
   authors: [{ name: "Max Lab" }],
   creator: "Max Lab",
   publisher: "maxlab.tech",
@@ -26,13 +43,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://maxlab.tech",
+    url: siteUrl,
     title: "maxlab — Interactive Launch Assets That Live & Evolve",
-    description: "Persistent, interactive web experiences — 3D heroes, product configurators, scroll-driven stories. Fixed scope. Fixed price.",
+    description:
+      "Persistent, interactive web experiences — 3D heroes, product configurators, scroll-driven stories. Fixed scope. Fixed price.",
     siteName: "maxlab",
     images: [
       {
-        url: "/max-portfolio/og-image.png",
+        url: isGithubPages ? `${siteUrl}/og-image.png` : `${basePath}/og-image.png`,
         width: 1200,
         height: 630,
         alt: "maxlab — Interactive Launch Assets",
@@ -42,8 +60,9 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "maxlab — Interactive Launch Assets",
-    description: "Persistent, interactive web experiences — 3D heroes, product configurators, scroll-driven stories.",
-    images: ["/max-portfolio/og-image.png"],
+    description:
+      "Persistent, interactive web experiences — 3D heroes, product configurators, scroll-driven stories.",
+    images: [isGithubPages ? `${siteUrl}/og-image.png` : `${basePath}/og-image.png`],
     creator: "@maxlab",
   },
   verification: {
@@ -66,7 +85,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const basePath = "/max-portfolio";
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <head>
