@@ -1,0 +1,105 @@
+{
+  "version": "1.0.0",
+  "updated_at": "2026-11-02T16:15:00Z",
+  "pipeline": "iLander Autonomous Engine",
+  "summary": {
+    "total_leads": 3,
+    "audited": 3,
+    "pitch_prepared": 3,
+    "outreach_pending": 3,
+    "target_daily_revenue": "$150/day"
+  },
+  "leads": [
+    {
+      "id": "lead-001",
+      "name": "Shape",
+      "url": "https://useshape.org",
+      "github_repo": "https://github.com/useshape/Shape",
+      "category": "AI Coding Agent / Developer Tool",
+      "lead_contact": {
+        "name": "Nathan Crosdale",
+        "role": "Creator / Core Maintainer",
+        "email": "crosdalenathan@gmail.com",
+        "github": "https://github.com/almms"
+      },
+      "audit": {
+        "score": "6.5/10",
+        "headline_critique": "Value prop is strong ('The open-source AI agent desktop app') but the hero is visually static with a flat code mockup and standard download button.",
+        "friction_points": [
+          "Static hero does not showcase the agent's real-time reasoning and multi-file tree manipulation.",
+          "Users have to mentally simulate what using the app feels like instead of experiencing the velocity upfront.",
+          "Competitors like Cursor / Windsurf / Devin use slick dynamic simulations to hook developers immediately."
+        ],
+        "proposed_solution": "Interactive 3D Agent Workflow Hero: A live interactive node visualizer in Three.js where developers can click 'Trigger Agent', see the agent parse an AST tree in real-time 3D, and interact with the code diffing preview directly inside the browser viewport."
+      },
+      "package_offer": {
+        "service": "Interactive 3D Hero & Dynamic Simulation Component",
+        "tier": "Sprint Prototype",
+        "price_usd": 650,
+        "delivery_days": 7
+      },
+      "status": "PITCH_PREPARED",
+      "pitch_file": "pitches/useshape-pitch.md"
+    },
+    {
+      "id": "lead-002",
+      "name": "Companion Intelligence (Companion Core 128)",
+      "url": "https://ci.computer",
+      "category": "Private AI Hardware / Personal Server",
+      "lead_contact": {
+        "name": "Liam Broza",
+        "role": "Founder & Lead",
+        "email": "support@ci.computer",
+        "twitter": "https://x.com/LiamBroza",
+        "github": "https://github.com/mrhegemon"
+      },
+      "audit": {
+        "score": "7.2/10",
+        "headline_critique": "High-ticket hardware ($5,900 price point) currently represented by 2D webp cutouts ('core-silver-cut.webp'). Flat images lack tactile luxury feel required to close $5.9k impulse reservations.",
+        "friction_points": [
+          "For a $5,900 hardware product, customers demand to inspect ports, chassis material, cooling vents, and internal modularity.",
+          "Current page has cost comparison graphs and app store cards, but the physical hardware hero is static.",
+          "Crowdfunding is currently LIVE on Kickstarter (ends Nov 12, 2026), making high conversion urgency critical right now."
+        ],
+        "proposed_solution": "Interactive 3D WebGL Hardware Configurator: Direct 360° orbital rotation of the Companion Core chassis, interactive color finish toggle (Charcoal vs. Silver Anodized), and an 'Exploded Architecture' mode exposing the internal compute board and private storage bays."
+      },
+      "package_offer": {
+        "service": "High-Fidelity 3D WebGL Hardware Hero & Configurator",
+        "tier": "Flagship 3D Asset",
+        "price_usd": 1200,
+        "delivery_days": 10
+      },
+      "status": "PITCH_PREPARED",
+      "pitch_file": "pitches/companion-core-pitch.md"
+    },
+    {
+      "id": "lead-003",
+      "name": "zCAD AI",
+      "url": "https://zcad.ai",
+      "category": "Generative AI for 3D CAD & Parametric Engineering",
+      "lead_contact": {
+        "name": "Zixel Technologies Team",
+        "role": "Founders",
+        "email": "support@zcad.ai"
+      },
+      "audit": {
+        "score": "5.8/10",
+        "headline_critique": "A company building Generative 3D CAD has a 2D particle banner in their hero instead of actual 3D geometry. It's a missed dogfooding opportunity.",
+        "friction_points": [
+          "Engineering leads expect immediate proof that the CAD engine can render and slice parametric geometry in real time.",
+          "Abstract particle background looks like a generic SaaS template rather than deep engineering tech.",
+          "No interactive demo before asking for signup/waitlist."
+        ],
+        "proposed_solution": "Live Interactive Parametric CAD Viewport Hero: An embedded Three.js / WebGL viewport where visitors can tweak parametric sliders (radius, extrusion, twist, tolerance) and see real CAD meshes generate and animate in real time in the browser."
+      },
+      "package_offer": {
+        "service": "Interactive Parametric 3D Hero Viewport Component",
+        "tier": "Sprint Prototype",
+        "price_usd": 750,
+        "delivery_days": 7
+      },
+      "status": "PITCH_PREPARED",
+      "pitch_file": "pitches/zcad-ai-pitch.md"
+    }
+  ]
+}
