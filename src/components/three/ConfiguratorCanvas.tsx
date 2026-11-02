@@ -7,6 +7,22 @@ import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+// Filter out upstream THREE.Clock deprecation warning if triggered by R3F
+if (typeof window !== "undefined") {
+  const origWarn = console.warn;
+  console.warn = (...args: unknown[]) => {
+    const msg = args[0];
+    if (
+      typeof msg === "string" &&
+      (msg.includes("THREE.Clock: This module has been deprecated") ||
+        msg.includes("THREE.Clock"))
+    ) {
+      return;
+    }
+    origWarn.apply(console, args);
+  };
+}
+
 gsap.registerPlugin(ScrollTrigger);
 
 interface ConfiguratorCanvasProps {

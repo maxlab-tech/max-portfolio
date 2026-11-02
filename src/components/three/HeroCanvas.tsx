@@ -7,6 +7,22 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
 
+// Filter out upstream THREE.Clock deprecation warning if triggered by R3F
+if (typeof window !== "undefined") {
+  const origWarn = console.warn;
+  console.warn = (...args: unknown[]) => {
+    const msg = args[0];
+    if (
+      typeof msg === "string" &&
+      (msg.includes("THREE.Clock: This module has been deprecated") ||
+        msg.includes("THREE.Clock"))
+    ) {
+      return;
+    }
+    origWarn.apply(console, args);
+  };
+}
+
 gsap.registerPlugin(ScrollTrigger);
 
 export default function HeroCanvas() {
@@ -20,19 +36,20 @@ export default function HeroCanvas() {
         { opacity: 1, duration: 1.5, ease: "power3.out" }
       );
 
-      // Parallax on scroll
-      ScrollTrigger.create({
-        trigger: canvasRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: 1,
-        onUpdate: (self) => {
-          if (canvasRef.current) {
-            const progress = self.progress;
-            canvasRef.current.style.transform = `translateY(${progress * 100}px) scale(${1 - progress * 0.1})`;
-          }
-        },
-      });
+      // GPU-accelerated smooth parallax on scroll (avoids layout thrashing / forced reflow)
+      if (canvasRef.current) {
+        gsap.to(canvasRef.current, {
+          y: 100,
+          scale: 0.9,
+          ease: "none",
+          scrollTrigger: {
+            trigger: canvasRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+      }
     }, canvasRef);
 
     return () => ctx.revert();
@@ -42,7 +59,7 @@ export default function HeroCanvas() {
     <div
       ref={canvasRef}
       className="absolute inset-0 z-0 w-full h-full pointer-events-none overflow-hidden"
-      style={{ touchAction: "none" }}
+      style={{ touchAction: "none", willChange: "transform, opacity" }}
     >
       <CanvasErrorBoundary>
         <Canvas

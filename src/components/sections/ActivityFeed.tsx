@@ -6,41 +6,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Simulated activity data - in production this would come from a real source (Supabase, GitHub, etc.)
-const activityTypes = [
-  { type: "deploy", icon: "🚀", label: "Deployed", color: "#00d4aa" },
-  { type: "commit", icon: "💾", label: "Committed", color: "#8b5cf6" },
-  { type: "review", icon: "👁️", label: "Code Review", color: "#f59e0b" },
-  { type: "issue", icon: "🐛", label: "Issue Opened", color: "#ef4444" },
-  { type: "merge", icon: "🔀", label: "Merged PR", color: "#06b6d4" },
-  { type: "release", icon: "📦", label: "Released", color: "#ec4899" },
-  { type: "test", icon: "✅", label: "Tests Passed", color: "#22c55e" },
-  { type: "perf", icon: "⚡", label: "Perf Audit", color: "#f97316" },
-];
-
-const projects = [
-  { name: "max-portfolio", color: "#00d4aa" },
-  { name: "orbital-dashboard", color: "#8b5cf6" },
-  { name: "nexus-configurator", color: "#f59e0b" },
-  { name: "astral-mint", color: "#ec4899" },
-  { name: "pulse-analytics", color: "#06b6d4" },
-];
-
-const messages = [
-  "pushed 3 commits to main",
-  "opened PR #247: Add scroll-triggered hero variant",
-  "merged PR #245: Fix mobile gesture handling",
-  "deployed preview to orbital-dashboard-abc123.vercel.app",
-  "released v2.1.0 — new particle shader system",
-  "passed all 247 tests (2.3s)",
-  "perf audit: LCP 2.1s → 1.8s (-14%)",
-  "opened issue #89: Memory leak in Three.js cleanup",
-  "pushed 1 commit to feat/configurator-variants",
-  "deployed production to nexus-configurator.pages.dev",
-  "code review completed on PR #234",
-  "released v1.3.0 — added Stripe webhook handler",
-];
-
 interface Activity {
   id: string;
   type: string;
@@ -50,70 +15,231 @@ interface Activity {
   project: string;
   projectColor: string;
   message: string;
+  timeAgo: string;
   timestamp: number;
 }
 
-function generateActivities(count: number): Activity[] {
-  const activities: Activity[] = [];
-  const now = Date.now();
-  
-  for (let i = 0; i < count; i++) {
-    const type = activityTypes[Math.floor(Math.random() * activityTypes.length)];
-    const project = projects[Math.floor(Math.random() * projects.length)];
-    const message = messages[Math.floor(Math.random() * messages.length)];
-    const timeOffset = Math.random() * 7 * 24 * 60 * 60 * 1000; // Up to 7 days ago
-    const timestamp = now - timeOffset;
-    
-    activities.push({
-      id: `activity-${i}`,
-      type: type.type,
-      icon: type.icon,
-      label: type.label,
-      color: type.color,
-      project: project.name,
-      projectColor: project.color,
-      message,
-      timestamp,
-    });
-  }
-  
-  // Sort by timestamp descending (newest first)
-  return activities.sort((a, b) => b.timestamp - a.timestamp);
-}
+const activityTypes = [
+  { type: "deploy", icon: "🚀", label: "Deployed", color: "#00d4aa" },
+  { type: "commit", icon: "💾", label: "Committed", color: "#8b5cf6" },
+  { type: "review", icon: "👁️", label: "Code Review", color: "#f59e0b" },
+  { type: "issue", icon: "🐛", label: "Issue Solved", color: "#ef4444" },
+  { type: "merge", icon: "🔀", label: "Merged PR", color: "#06b6d4" },
+  { type: "release", icon: "📦", label: "Released", color: "#ec4899" },
+  { type: "test", icon: "✅", label: "Tests Passed", color: "#22c55e" },
+  { type: "perf", icon: "⚡", label: "Perf Audit", color: "#f97316" },
+];
 
-const INITIAL_ACTIVITIES = generateActivities(50);
+// Deterministic static activities to guarantee 100% server-client parity during React hydration (prevents Error #418)
+const STATIC_ACTIVITIES: Activity[] = [
+  {
+    id: "act-1",
+    type: "deploy",
+    icon: "🚀",
+    label: "Deployed",
+    color: "#00d4aa",
+    project: "max-portfolio",
+    projectColor: "#00d4aa",
+    message: "production release v1.4.2 live on Cloudflare Pages",
+    timeAgo: "2m ago",
+    timestamp: 1730560000000,
+  },
+  {
+    id: "act-2",
+    type: "commit",
+    icon: "💾",
+    label: "Committed",
+    color: "#8b5cf6",
+    project: "radar-engine",
+    projectColor: "#f59e0b",
+    message: "feat(radar): autonomous high-ticket lead auditor & pitch engine",
+    timeAgo: "14m ago",
+    timestamp: 1730559000000,
+  },
+  {
+    id: "act-3",
+    type: "perf",
+    icon: "⚡",
+    label: "Perf Audit",
+    color: "#f97316",
+    project: "max-portfolio",
+    projectColor: "#00d4aa",
+    message: "perf audit: LCP 1.1s, 0ms FID, 100/100 Core Web Vitals",
+    timeAgo: "32m ago",
+    timestamp: 1730558000000,
+  },
+  {
+    id: "act-4",
+    type: "merge",
+    icon: "🔀",
+    label: "Merged PR",
+    color: "#06b6d4",
+    project: "nexus-configurator",
+    projectColor: "#8b5cf6",
+    message: "merged PR #32: WebGL 3D dynamic lighting & shader optimization",
+    timeAgo: "1h ago",
+    timestamp: 1730555000000,
+  },
+  {
+    id: "act-5",
+    type: "release",
+    icon: "📦",
+    label: "Released",
+    color: "#ec4899",
+    project: "orbital-dashboard",
+    projectColor: "#ec4899",
+    message: "released v2.1.0 — new particle shader system & real-time telemetry",
+    timeAgo: "2h ago",
+    timestamp: 1730551000000,
+  },
+  {
+    id: "act-6",
+    type: "test",
+    icon: "✅",
+    label: "Tests Passed",
+    color: "#22c55e",
+    project: "max-portfolio",
+    projectColor: "#00d4aa",
+    message: "passed all 247 automated integration & visual regression tests",
+    timeAgo: "3h ago",
+    timestamp: 1730548000000,
+  },
+  {
+    id: "act-7",
+    type: "review",
+    icon: "👁️",
+    label: "Code Review",
+    color: "#f59e0b",
+    project: "pulse-analytics",
+    projectColor: "#06b6d4",
+    message: "code review completed on PR #234: zero-hydration SSR parity",
+    timeAgo: "5h ago",
+    timestamp: 1730541000000,
+  },
+  {
+    id: "act-8",
+    type: "deploy",
+    icon: "🚀",
+    label: "Deployed",
+    color: "#00d4aa",
+    project: "nexus-configurator",
+    projectColor: "#8b5cf6",
+    message: "deployed production to nexus-configurator.pages.dev",
+    timeAgo: "8h ago",
+    timestamp: 1730530000000,
+  },
+  {
+    id: "act-9",
+    type: "commit",
+    icon: "💾",
+    label: "Committed",
+    color: "#8b5cf6",
+    project: "max-portfolio",
+    projectColor: "#00d4aa",
+    message: "pushed 4 commits to feat/configurator-variants",
+    timeAgo: "12h ago",
+    timestamp: 1730515000000,
+  },
+  {
+    id: "act-10",
+    type: "issue",
+    icon: "🐛",
+    label: "Issue Solved",
+    color: "#ef4444",
+    project: "orbital-dashboard",
+    projectColor: "#ec4899",
+    message: "closed issue #89: optimized Three.js buffer memory deallocation",
+    timeAgo: "1d ago",
+    timestamp: 1730470000000,
+  },
+  {
+    id: "act-11",
+    type: "release",
+    icon: "📦",
+    label: "Released",
+    color: "#ec4899",
+    project: "pulse-analytics",
+    projectColor: "#06b6d4",
+    message: "released v1.3.0 — added Stripe webhook handler & billing portal",
+    timeAgo: "1d ago",
+    timestamp: 1730460000000,
+  },
+  {
+    id: "act-12",
+    type: "deploy",
+    icon: "🚀",
+    label: "Deployed",
+    color: "#00d4aa",
+    project: "astral-mint",
+    projectColor: "#00d4aa",
+    message: "deployed preview to astral-mint-staging.vercel.app",
+    timeAgo: "2d ago",
+    timestamp: 1730380000000,
+  },
+  {
+    id: "act-13",
+    type: "merge",
+    icon: "🔀",
+    label: "Merged PR",
+    color: "#06b6d4",
+    project: "radar-engine",
+    projectColor: "#f59e0b",
+    message: "merged PR #14: automated 3D hero pitch generation workflow",
+    timeAgo: "2d ago",
+    timestamp: 1730360000000,
+  },
+  {
+    id: "act-14",
+    type: "test",
+    icon: "✅",
+    label: "Tests Passed",
+    color: "#22c55e",
+    project: "nexus-configurator",
+    projectColor: "#8b5cf6",
+    message: "passed 182 3D mesh rendering & interaction matrix tests",
+    timeAgo: "3d ago",
+    timestamp: 1730280000000,
+  },
+  {
+    id: "act-15",
+    type: "commit",
+    icon: "💾",
+    label: "Committed",
+    color: "#8b5cf6",
+    project: "orbital-dashboard",
+    projectColor: "#ec4899",
+    message: "pushed 6 commits to feat/touch-gesture-controls",
+    timeAgo: "4d ago",
+    timestamp: 1730190000000,
+  },
+];
+
+const LIVE_TEMPLATES = [
+  { type: "deploy", icon: "🚀", label: "Deployed", color: "#00d4aa", project: "max-portfolio", projectColor: "#00d4aa", message: "hotfix: asset pipeline optimization live" },
+  { type: "commit", icon: "💾", label: "Committed", color: "#8b5cf6", project: "radar-engine", projectColor: "#f59e0b", message: "pushed lead enrichment parser updates" },
+  { type: "test", icon: "✅", label: "Tests Passed", color: "#22c55e", project: "nexus-configurator", projectColor: "#8b5cf6", message: "e2e visual parity check passed" },
+  { type: "review", icon: "👁️", label: "Code Review", color: "#f59e0b", project: "max-portfolio", projectColor: "#00d4aa", message: "approved PR: hydration safety barrier" },
+  { type: "perf", icon: "⚡", label: "Perf Audit", color: "#f97316", project: "orbital-dashboard", projectColor: "#ec4899", message: "WebGL frame time steady at 16.6ms (60 FPS)" },
+];
 
 export default function ActivityFeed() {
   const sectionRef = useRef<HTMLElement>(null);
   const feedRef = useRef<HTMLDivElement>(null);
-  const [activities, setActivities] = useState<Activity[]>(INITIAL_ACTIVITIES);
+  const [mounted, setMounted] = useState(false);
+  const [activities, setActivities] = useState<Activity[]>(STATIC_ACTIVITIES);
   const [filter, setFilter] = useState("all");
   const [paused, setPaused] = useState(false);
   const [liveMode, setLiveMode] = useState(true);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Simulate live updates
   useEffect(() => {
-    if (!liveMode) return;
-    
-    intervalRef.current = setInterval(() => {
-      if (paused) return;
-      
-      const newActivity = generateActivities(1)[0];
-      newActivity.id = `live-${Date.now()}`;
-      newActivity.timestamp = Date.now();
-      
-      setActivities(prev => [newActivity, ...prev.slice(0, 99)]);
-    }, 8000 + Math.random() * 12000); // Every 8-20 seconds
-    
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [liveMode, paused]);
+    setMounted(true);
+  }, []);
 
-  // Format time ago
-  const formatTimeAgo = (timestamp: number) => {
-    const diff = Date.now() - timestamp;
+  // Format time ago for client-side live updates
+  const formatTimeAgo = (timestamp: number, defaultTimeAgo: string) => {
+    if (!mounted) return defaultTimeAgo;
+    const diff = Math.max(0, Date.now() - timestamp);
     const minutes = Math.floor(diff / 60000);
     const hours = Math.floor(diff / 3600000);
     const days = Math.floor(diff / 86400000);
@@ -124,13 +250,43 @@ export default function ActivityFeed() {
     return `${days}d ago`;
   };
 
+  // Simulate live updates only after client mounting
+  useEffect(() => {
+    if (!mounted || !liveMode) return;
+    
+    intervalRef.current = setInterval(() => {
+      if (paused) return;
+      
+      const template = LIVE_TEMPLATES[Math.floor(Math.random() * LIVE_TEMPLATES.length)];
+      const now = Date.now();
+      const newActivity: Activity = {
+        id: `live-${now}`,
+        type: template.type,
+        icon: template.icon,
+        label: template.label,
+        color: template.color,
+        project: template.project,
+        projectColor: template.projectColor,
+        message: template.message,
+        timeAgo: "just now",
+        timestamp: now,
+      };
+      
+      setActivities(prev => [newActivity, ...prev.slice(0, 49)]);
+    }, 12000);
+    
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [mounted, liveMode, paused]);
+
   const filteredActivities = useMemo(() => {
     if (filter === "all") return activities;
     return activities.filter(a => a.type === filter);
   }, [activities, filter]);
 
   const activityTypesList = useMemo(() => 
-    [...new Set(activities.map(a => a.type))], [activities]);
+    Array.from(new Set(STATIC_ACTIVITIES.map(a => a.type))), []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -138,11 +294,11 @@ export default function ActivityFeed() {
       if (sectionHeader) {
         gsap.fromTo(
           sectionHeader,
-          { opacity: 0, y: 40 },
+          { opacity: 0, y: 30 },
           {
             opacity: 1,
             y: 0,
-            duration: 1,
+            duration: 0.8,
             ease: "power3.out",
             scrollTrigger: {
               trigger: sectionRef.current,
@@ -154,13 +310,13 @@ export default function ActivityFeed() {
 
       gsap.fromTo(
         ".activity-item",
-        { opacity: 0, x: -30 },
+        { opacity: 0, x: -20 },
         {
           opacity: 1,
           x: 0,
-          duration: 0.4,
+          duration: 0.35,
           ease: "power3.out",
-          stagger: 0.05,
+          stagger: 0.03,
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top 75%",
@@ -170,7 +326,7 @@ export default function ActivityFeed() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [filteredActivities.length]); // Re-animate on filter change
+  }, [filter]);
 
   return (
     <section ref={sectionRef} id="activity" className="relative py-32 md:py-48 px-6">
@@ -185,7 +341,7 @@ export default function ActivityFeed() {
               <span className="gradient-text">iLog</span> — Real-Time System Pulse
             </h2>
             <p className="text-muted-foreground mt-2 max-w-xl">
-              Inspired by iLands' autonomous rhythm. Every deploy, commit, review, and metric — visible, queryable, persistent.
+              Inspired by iLands autonomous rhythm. Every deploy, commit, review, and metric — visible, queryable, persistent.
             </p>
           </div>
 
@@ -240,73 +396,72 @@ export default function ActivityFeed() {
             <span className="text-right pr-6">MESSAGE</span>
           </div>
 
-          {/* Activities */}
-          <div className="max-h-[600px] overflow-y-auto custom-scrollbar">
-            {filteredActivities.length === 0 ? (
-              <div className="p-12 text-center text-muted-foreground">
-                No activity matching filter "{filter}"
-              </div>
-            ) : (
-              <div className="divide-y divide-border/30">
-                {filteredActivities.map((activity, index) => (
-                  <ActivityItem
-                    key={activity.id}
-                    activity={activity}
-                    formatTimeAgo={formatTimeAgo}
-                    index={index}
-                  />
-                ))}
-              </div>
-            )}
+          {/* Activities List */}
+          <div className="divide-y divide-border/30 max-h-[500px] overflow-y-auto">
+            {filteredActivities.map((activity) => (
+              <ActivityItem
+                key={activity.id}
+                activity={activity}
+                formatTimeAgo={formatTimeAgo}
+              />
+            ))}
           </div>
 
-          {/* Footer */}
-          <div className="px-6 py-4 border-t border-border/50 flex items-center justify-between text-sm text-muted-foreground">
-            <span>{filteredActivities.length} activities shown</span>
-            <span className="flex items-center gap-2">
-              <span className={`w-2 h-2 rounded-full ${liveMode ? "bg-accent animate-pulse" : "bg-muted-foreground"}`} />
-              {liveMode ? "Streaming live" : "Paused"}
-            </span>
+          {/* Footer Stats */}
+          <div className="px-6 py-4 border-t border-border/50 bg-card/30 flex flex-wrap items-center justify-between gap-4 text-xs text-muted-foreground">
+            <div className="flex items-center gap-4">
+              <span>Showing {filteredActivities.length} events</span>
+              <span>•</span>
+              <span className="flex items-center gap-1.5">
+                <span className={`w-2 h-2 rounded-full ${paused ? "bg-amber-400" : "bg-emerald-400 animate-pulse"}`} />
+                {paused ? "Feed paused" : "Streaming live events"}
+              </span>
+            </div>
+            <div>
+              <span>Updated automatically via autonomous rhythm</span>
+            </div>
           </div>
-        </div>
-
-        {/* Legend */}
-        <div className="mt-8 flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
-          {activityTypes.map((t) => (
-            <span key={t.type} className="flex items-center gap-1.5" style={{ color: t.color }}>
-              {t.icon} {t.label}
-            </span>
-          ))}
         </div>
       </div>
     </section>
   );
 }
 
-function ActivityItem({ activity, formatTimeAgo, index }: { activity: Activity; formatTimeAgo: (ts: number) => string; index: number }) {
+function ActivityItem({
+  activity,
+  formatTimeAgo,
+}: {
+  activity: Activity;
+  formatTimeAgo: (timestamp: number, defaultTimeAgo: string) => string;
+}) {
   return (
-    <div className="activity-item grid grid-cols-[auto_1fr_auto_auto] gap-4 px-6 py-4 hover:bg-card/50 transition-colors" style={{ opacity: 0, transform: "translateX(-30px)" }}>
-      <time className="text-xs text-muted-foreground font-mono whitespace-nowrap self-center">
-        {formatTimeAgo(activity.timestamp)}
+    <div className="activity-item grid grid-cols-[auto_1fr_auto_auto] gap-4 px-6 py-4 items-center hover:bg-card/50 transition-colors">
+      <time
+        suppressHydrationWarning
+        className="text-xs text-muted-foreground font-mono whitespace-nowrap self-center"
+      >
+        {formatTimeAgo(activity.timestamp, activity.timeAgo)}
       </time>
-      
-      <div className="self-center">
-        <span 
-          className="px-2.5 py-0.5 rounded text-xs font-medium"
-          style={{ background: `${activity.projectColor}20`, color: activity.projectColor, border: `1px solid ${activity.projectColor}40` }}
-        >
-          {activity.project}
-        </span>
+      <div className="flex items-center gap-2">
+        <span
+          className="w-2 h-2 rounded-full shrink-0"
+          style={{ backgroundColor: activity.projectColor }}
+        />
+        <span className="text-sm font-medium truncate">{activity.project}</span>
       </div>
-      
-      <div className="self-center flex items-center gap-2">
-        <span className="text-lg">{activity.icon}</span>
-        <span className="text-xs font-medium px-2 py-0.5 rounded" style={{ background: `${activity.color}20`, color: activity.color, border: `1px solid ${activity.color}40` }}>
+      <div className="flex items-center gap-1.5 self-center">
+        <span>{activity.icon}</span>
+        <span
+          className="text-xs px-2 py-0.5 rounded-full font-medium whitespace-nowrap"
+          style={{
+            backgroundColor: `${activity.color}20`,
+            color: activity.color,
+          }}
+        >
           {activity.label}
         </span>
       </div>
-      
-      <div className="self-center text-right pr-6 text-sm text-foreground/80">
+      <div className="self-center text-right pr-6 text-sm text-foreground/80 truncate">
         {activity.message}
       </div>
     </div>

@@ -89,23 +89,23 @@ export default function Configurator() {
         }
       );
 
-      // Price counter animation
-      ScrollTrigger.create({
-        trigger: canvasRef.current,
-        start: "top 60%",
-        end: "bottom 40%",
-        scrub: 1,
-        onUpdate: (self) => {
-          const priceEl = document.querySelector(".price-counter");
-          if (priceEl) {
+      // Price counter animation (cached DOM element to prevent forced reflow)
+      const priceEl = document.querySelector(".price-counter");
+      if (priceEl) {
+        ScrollTrigger.create({
+          trigger: canvasRef.current,
+          start: "top 60%",
+          end: "bottom 40%",
+          scrub: 1,
+          onUpdate: () => {
             const basePrice = 3500;
             const materialMultiplier = material === "glass" ? 1.3 : material === "metallic" ? 1.2 : 1;
             const geometryMultiplier = geometry === "torusKnot" ? 1.15 : 1;
             const price = Math.round(basePrice * materialMultiplier * geometryMultiplier);
             priceEl.textContent = `$${price.toLocaleString()}`;
-          }
-        },
-      });
+          },
+        });
+      }
     }, canvasRef);
 
     return () => ctx.revert();

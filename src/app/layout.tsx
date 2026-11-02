@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import ClientConsoleFilter from "@/components/utils/ClientConsoleFilter";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -97,6 +98,7 @@ export default function RootLayout({
         <link rel="manifest" href={`${basePath}/site.webmanifest`} />
       </head>
       <body className="min-h-screen bg-background text-foreground antialiased">
+        <ClientConsoleFilter />
         <main>{children}</main>
       </body>
     </html>
