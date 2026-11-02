@@ -9,22 +9,20 @@
 
 Hey Nathan,
 
-Huge congrats on rolling out Shape (useshape.org) — the local model support and visual git diffing UX is ridiculously smooth compared to the clunky electron wrappers out there.
+Saw the launch of Shape on Product Hunt and GitHub. The local model integration and visual git diffing look clean and noticeably snappier than most Electron-based dev tools.
 
-One quick observation while studying your landing page:
-Your core differentiator is *how fast and autonomously Shape handles multi-file trees*, but the hero is currently anchored by a static code mockup. Developers visiting on desktop have to mentally imagine the agentic loop instead of feeling it immediately.
+One observation on the landing page:
+Shape's real advantage is how fast and autonomously it works across a multi-file repo. Right now the hero shows a static code mockup, so visitors have to imagine how the agent works instead of seeing it right away.
 
-I put together an interactive concept for your hero section:
-A lightweight Three.js/WebGL agent node visualizer where visitors can click "Trigger Agent", watch the AST dependency graph explode and re-link in real-time 3D, and scrub through live diffs right inside the viewport before even hitting "Download".
+I sketched out an interactive concept for the hero:
+A lightweight WebGL visualizer where visitors can click "Trigger Agent", watch an AST dependency graph re-link in 3D, and scrub through diffs directly in the viewport.
 
-You can see the interactive fidelity and rendering performance we build over at:
-👉 **https://maxlab.pages.dev** (or https://maxlab-tech.github.io/max-portfolio/)
+You can check out our live interactive component work here:
+👉 **https://maxlab-tech.github.io/max-portfolio/**
 
-Zero pitch call needed — if you're open to it, I can send over a 40-second screen capture or a sandbox branch showing how this drops right into your site without slowing down initial paint.
+If you're interested, I can send over a 40-second screen recording showing how this drops into your Next.js setup without adding layout shift or tanking initial paint.
 
-Would love to know what you think!
-
-Cheers,  
+Best,  
 **Max**  
-Creative Engineer & Founder, maxlab  
-Portfolio: https://maxlab.pages.dev
+Creative Engineer, maxlab  
+https://maxlab-tech.github.io/max-portfolio/

@@ -2,30 +2,28 @@
 
 **Target:** Founders & Product Leads, zCAD AI  
 **Email:** `support@zcad.ai`  
-**Subject:** zCAD AI hero — live parametric 3D viewport concept
+**Subject:** zCAD AI hero: live parametric 3D viewport concept
 
 ---
 
 Hey team zCAD,
 
-Congrats on taking #1 Product of the Day on Product Hunt — bringing generative parametric CAD to engineering workflows solves a massive bottleneck in hardware design.
+Saw the launch of zCAD on Product Hunt. Bringing generative parametric CAD directly to engineering workflows addresses a real bottleneck in hardware iteration.
 
-A quick UX thought after inspecting zcad.ai:
-You are building deep 3D CAD technology, but your hero section currently relies on an abstract 2D particle animation. For mechanical engineers and CAD directors landing on your site, seeing a live parametric mesh manipulate in real time right in the hero would be the ultimate proof of capability before they even hit the signup form.
+One observation after looking through zcad.ai:
+You build deep 3D CAD tooling, but the current hero relies on an abstract 2D particle animation. For mechanical engineers evaluating your product, seeing a live parametric mesh update in real time in the hero would be immediate proof of capability before they even reach the signup form.
 
-We put together a concept for an Interactive Parametric 3D Viewport Hero:
-- Embedded WebGL canvas rendering live parametric geometry (lathe, sweep, extrusion).
-- Draggable UI sliders directly in the hero (Radius, Wall Thickness, Tolerance) that morph the 3D model in real-time at 60fps.
-- Instant dogfooding: visitors immediately perceive zCAD as high-performance engineering software rather than a generic SaaS wrapper.
+We put together a concept for a parametric 3D viewport hero:
+- Lightweight WebGL canvas rendering parametric geometry
+- Interactive sliders (radius, wall thickness, tolerance) that morph the model at 60fps
+- Instant dogfooding: visitors immediately experience the software as high-performance engineering tooling
 
-You can test our live Three.js / WebGL rendering performance and interactions here:
-👉 **https://maxlab.pages.dev** (or https://maxlab-tech.github.io/max-portfolio/)
+You can test our WebGL rendering and interaction patterns here:
+👉 **https://maxlab-tech.github.io/max-portfolio/**
 
-If you'd like to test this on your landing page, I can package a lightweight React/Three.js component ready for Next.js with zero layout shift.
-
-Let me know if you'd like to see the live sandbox!
+If you would like to test this on your site, I can share a self-contained React/Three.js component ready for Next.js with zero layout shift.
 
 Best,  
 **Max**  
 Creative Engineer, maxlab  
-https://maxlab.pages.dev
+https://maxlab-tech.github.io/max-portfolio/
