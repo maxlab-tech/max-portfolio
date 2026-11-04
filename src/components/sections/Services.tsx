@@ -337,17 +337,17 @@ function ComparisonTable({ tiers }: { tiers: Tier[] }) {
 
 function ProcessSteps() {
   const steps = [
-    { num: "01", title: "Discover & Scope", desc: "30-min call → we define exact scope, timeline, success metrics. Fixed price agreed." },
+    { num: "01", title: "Async Brief & Scope", desc: "Async brief → I analyze friction points and define exact scope, timeline, and deliverables. Fixed price agreed in writing." },
     { num: "02", title: "Kickoff & Design", desc: "Figma prototypes, component architecture, tech spec. You approve before code." },
     { num: "03", title: "Build & Iterate", desc: "Daily commits, preview deployments, 2 revision cycles built-in. Transparent progress." },
-    { num: "04", title: "Launch & Handover", desc: "Deploy to your domain, full repo/docs/component library handover, training call." },
+    { num: "04", title: "Launch & Handover", desc: "Deploy to your domain, full repo/docs/component library handover, complete async video walkthrough." },
     { num: "05", title: "Maintain & Evolve", desc: "Maintenance window active. Quarterly iteration sprints available. Priority access." },
   ];
 
   return (
     <div className="mt-24">
       <h3 className="text-3xl md:text-4xl font-bold text-center mb-16">
-        From Call to Live in <span className="gradient-text">10–21 Days</span>
+        From Brief to Live in <span className="gradient-text">10–21 Days</span>
       </h3>
       <div className="relative">
         {/* Timeline line */}

@@ -264,8 +264,8 @@ export default function Contact() {
                 <div className="flex gap-4">
                   <div className="w-10 h-10 rounded-xl bg-accent/20 border border-accent/30 flex items-center justify-center flex-shrink-0 text-accent text-lg">1</div>
                   <div>
-                    <dt className="font-semibold mb-1">Discovery Call (30 min)</dt>
-                    <dd className="text-muted-foreground text-sm">We define exact scope, success metrics, timeline. Fixed price agreed in writing.</dd>
+                    <dt className="font-semibold mb-1">Async Scope & Spec (24h Turnaround)</dt>
+                    <dd className="text-muted-foreground text-sm">Submit your project brief. I audit requirements, map out the interactive architecture, and lock in a fixed-price proposal with zero meeting friction.</dd>
                   </div>
                 </div>
                 <div className="flex gap-4">
@@ -286,7 +286,7 @@ export default function Contact() {
                   <div className="w-10 h-10 rounded-xl bg-accent/20 border border-accent/30 flex items-center justify-center flex-shrink-0 text-accent text-lg">4</div>
                   <div>
                     <dt className="font-semibold mb-1">Launch & Handover</dt>
-                    <dd className="text-muted-foreground text-sm">Deploy to your domain, full repo/docs/component library handover, training call.</dd>
+                    <dd className="text-muted-foreground text-sm">Deploy to your domain, full repo/docs/component library handover, complete async video walkthrough.</dd>
                   </div>
                 </div>
                 <div className="flex gap-4">

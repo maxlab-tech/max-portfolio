@@ -17,8 +17,8 @@ interface Step {
 const steps: Step[] = [
   {
     number: "01",
-    title: "Discover & Scope",
-    description: "We map your vision to a fixed-scope spec. One call, one brief, zero ambiguity. You approve the plan before a single line of code.",
+    title: "Async Brief & Spec",
+    description: "Submit your vision or target URL via async brief. I audit conversion gaps and map out an interactive prototype spec. Zero meetings, zero ambiguity.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-6 h-6">
         <circle cx="12" cy="12" r="10" />
