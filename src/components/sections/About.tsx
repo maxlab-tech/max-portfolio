@@ -147,24 +147,6 @@ export default function About() {
           }
         );
       }
-
-      // Architectural reference cards animation
-      gsap.fromTo(
-        ".tenet-ref",
-        { opacity: 0, x: -30 },
-        {
-          opacity: 1,
-          y: 0,
-          x: 0,
-          duration: 0.6,
-          ease: "power3.out",
-          stagger: 0.06,
-          scrollTrigger: {
-            trigger: ".tenet-refs",
-            start: "top 85%",
-          },
-        }
-      );
     }, sectionRef);
 
     return () => ctx.revert();
@@ -317,45 +299,31 @@ export default function About() {
         </div>
 
         {/* Principles Grid */}
-        <div ref={cardsContainerRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24">
+        <div ref={cardsContainerRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {principles.map((p, i) => (
             <PrincipleCard key={i} {...p} index={i} />
           ))}
-        </div>
-
-        {/* Architectural References */}
-        <div className="tenet-refs glass rounded-2xl p-8 md:p-12 border-border/50">
-          <h3 className="text-2xl md:text-3xl font-bold mb-8 flex items-center gap-3">
-            <span className="text-accent">📚</span>
-            Architectural Foundations & Stack
-          </h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {principles.map((p, i) => (
-              <div key={i} className="tenet-ref p-4 rounded-xl bg-card/50 border border-border/50 hover:border-accent/30 transition-all">
-                <div className="text-2xl mb-2">{p.icon}</div>
-                <h4 className="font-semibold mb-1">{p.title}</h4>
-                <p className="text-sm text-muted-foreground mb-3">{p.desc}</p>
-                <div className="pt-3 border-t border-border/30">
-                  <span className="text-xs text-accent/70 font-medium">← Tenet: {p.tenet}</span>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>
   );
 }
 
-function PrincipleCard({ icon, title, desc }: { icon: string; title: string; desc: string; index: number }) {
+function PrincipleCard({ icon, title, desc, tenet }: { icon: string; title: string; desc: string; tenet: string; index: number }) {
   return (
     <div
-      className="principle-card group glass rounded-2xl p-8 border border-border/50 hover:border-accent/50 hover:shadow-[0_0_40px_rgba(0,212,170,0.1)] transition-all duration-500"
+      className="principle-card group glass rounded-2xl p-8 border border-border/50 hover:border-accent/50 hover:shadow-[0_0_40px_rgba(0,212,170,0.1)] transition-all duration-500 flex flex-col justify-between"
       style={{ opacity: 0, transform: "translateY(60px) rotateX(-10deg)" }}
     >
-      <div className="text-4xl mb-4 transform group-hover:scale-110 transition-transform">{icon}</div>
-      <h3 className="text-xl font-bold mb-3">{title}</h3>
-      <p className="text-muted-foreground leading-relaxed">{desc}</p>
+      <div>
+        <div className="text-4xl mb-4 transform group-hover:scale-110 transition-transform">{icon}</div>
+        <h3 className="text-xl font-bold mb-3">{title}</h3>
+        <p className="text-muted-foreground leading-relaxed text-sm mb-4">{desc}</p>
+      </div>
+      <div className="pt-3 border-t border-border/30 flex items-center justify-between">
+        <span className="text-xs text-accent/80 font-mono font-medium">← Tenet: {tenet}</span>
+        <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-mono">Autonomous Core</span>
+      </div>
     </div>
   );
 }

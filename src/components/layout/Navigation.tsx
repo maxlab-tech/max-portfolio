@@ -10,6 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 const navItems = [
   { href: "#about", label: "Philosophy" },
   { href: "#services", label: "Offers" },
+  { href: "#products", label: "Store" },
   { href: "#work", label: "Work" },
   { href: "#activity", label: "iLog" },
   { href: "#contact", label: "Contact" },

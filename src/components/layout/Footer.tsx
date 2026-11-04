@@ -86,6 +86,7 @@ export default function Footer() {
               {[
                 { href: "#about", label: "Philosophy" },
                 { href: "#services", label: "Offers" },
+                { href: "#products", label: "Store" },
                 { href: "#work", label: "Work" },
                 { href: "#activity", label: "iLog" },
                 { href: "#contact", label: "Contact" },
@@ -99,14 +100,14 @@ export default function Footer() {
             </ul>
           </nav>
 
-          {/* Tiers */}
+          {/* Products & Vault */}
           <nav>
-            <h4 className="font-semibold mb-4">Tiers</h4>
+            <h4 className="font-semibold mb-4">Store & Vault</h4>
             <ul className="space-y-3">
               {[
-                { href: "#services", label: "LAUNCH — $3,500" },
-                { href: "#services", label: "LAUNCH PRO — $6,500" },
-                { href: "#services", label: "LAUNCH SYSTEM — $11,000" },
+                { href: "#products", label: "3D WebGL Pack — $29" },
+                { href: "#products", label: "Agent Starter Kit — $39" },
+                { href: "#products", label: "Free 3D Card — $0" },
               ].map((item) => (
                 <li key={item.label}>
                   <Link href={item.href} className="footer-link text-sm text-muted-foreground hover:text-accent transition-colors">

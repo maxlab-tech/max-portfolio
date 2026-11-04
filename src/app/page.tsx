@@ -10,6 +10,7 @@ import Process from "@/components/sections/Process";
 import Configurator from "@/components/sections/Configurator";
 import About from "@/components/sections/About";
 import Services from "@/components/sections/Services";
+import Products from "@/components/sections/Products";
 import Work from "@/components/sections/Work";
 import ActivityFeed from "@/components/sections/ActivityFeed";
 import Contact from "@/components/sections/Contact";
@@ -50,6 +51,7 @@ export default function Home() {
         <Configurator />
         <About />
         <Services />
+        <Products />
         <Work />
         <ActivityFeed />
         <Contact />
