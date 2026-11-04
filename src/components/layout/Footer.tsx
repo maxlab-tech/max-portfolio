@@ -133,7 +133,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-border/50 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground" suppressHydrationWarning>
-            © {currentYear} maxlab.tech — Built with Next.js, GSAP & Three.js. Partnered with Mabed Digital Creation.
+            © {currentYear} maxlab.tech — Built with Next.js, GSAP & Three.js. Partnered with Mabedth Digital Creation.
           </p>
           <p className="text-sm text-muted-foreground">
             Privacy • Terms • Cookie Policy
