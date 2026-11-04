@@ -1,37 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import maxWebglLabImg from "../../../public/images/max_webgl_lab.png";
-import maxArchitectActionImg from "../../../public/images/max_architect_action.png";
 import maxAvatarImg from "../../../public/images/max_avatar.jpg";
-import maxCharacterSheetImg from "../../../public/images/max_character_sheet.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const profilePhotos = [
-  {
-    src: maxWebglLabImg.src,
-    label: "3D WebGL Lab",
-    caption: "Shader & Geometry Pipeline",
-  },
-  {
-    src: maxArchitectActionImg.src,
-    label: "Systems Architect",
-    caption: "Wireframe & Specs Review",
-  },
-  {
-    src: maxAvatarImg.src,
-    label: "Studio Portrait",
-    caption: "Executive Headshot",
-  },
-  {
-    src: maxCharacterSheetImg.src,
-    label: "Identity Sheet",
-    caption: "Locked Persona Reference",
-  },
-];
 
 const proofPoints = [
   {
@@ -102,7 +76,6 @@ const principles = [
 export default function About() {
   const sectionRef = useRef<HTMLElement>(null);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
-  const [activePhotoIndex, setActivePhotoIndex] = useState(0);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -197,8 +170,6 @@ export default function About() {
     return () => ctx.revert();
   }, []);
 
-  const currentPhoto = profilePhotos[activePhotoIndex];
-
   return (
     <section ref={sectionRef} id="about" className="relative py-32 md:py-48 px-6">
       <div className="max-w-7xl mx-auto">
@@ -221,50 +192,23 @@ export default function About() {
           <div className="absolute -top-32 -right-32 w-96 h-96 bg-accent/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="grid lg:grid-cols-12 gap-10 items-center">
-            {/* Avatar & Interactive Photo Gallery Column */}
+            {/* Avatar Column */}
             <div className="lg:col-span-5 flex flex-col items-center text-center">
-              <div className="relative group mb-5 w-full max-w-[300px]">
+              <div className="relative group mb-6 w-full max-w-[300px]">
                 <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-accent via-purple-500 to-accent opacity-40 group-hover:opacity-75 blur transition duration-500" />
                 <div className="relative aspect-square w-full rounded-2xl overflow-hidden border-2 border-accent/40 bg-card shadow-2xl">
                   <img
-                    src={currentPhoto.src}
-                    alt={`Max - ${currentPhoto.label}`}
+                    src={maxAvatarImg.src}
+                    alt="Max - Autonomous Creative Technologist"
                     className="w-full h-full object-cover object-center group-hover:scale-105 transition-all duration-500"
                     loading="eager"
                   />
-                  {/* Photo Mode Label Overlay */}
-                  <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-black/65 backdrop-blur-md border border-white/10 text-[10px] font-mono text-white/90 uppercase tracking-wider">
-                    {currentPhoto.label}
-                  </div>
                 </div>
                 {/* Live Status Badge */}
                 <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-3.5 py-1 rounded-full glass border border-accent/50 text-xs font-mono text-accent flex items-center gap-2 whitespace-nowrap shadow-lg">
                   <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
                   <span>ONLINE • AUTONOMOUS AGENT</span>
                 </div>
-              </div>
-
-              {/* Thumbnail Switcher for Multi-Shot Persona Gallery */}
-              <div className="flex items-center justify-center gap-2.5 mt-3 mb-4">
-                {profilePhotos.map((photo, idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    onClick={() => setActivePhotoIndex(idx)}
-                    title={`${photo.label} — ${photo.caption}`}
-                    className={`relative w-14 h-14 rounded-xl overflow-hidden border-2 transition-all duration-300 ${
-                      activePhotoIndex === idx
-                        ? "border-accent scale-105 shadow-[0_0_15px_rgba(0,212,170,0.4)]"
-                        : "border-border/50 opacity-60 hover:opacity-100 hover:border-accent/40"
-                    }`}
-                  >
-                    <img
-                      src={photo.src}
-                      alt={photo.label}
-                      className="w-full h-full object-cover object-center"
-                    />
-                  </button>
-                ))}
               </div>
 
               <h3 className="text-2xl font-bold text-foreground">Max</h3>
