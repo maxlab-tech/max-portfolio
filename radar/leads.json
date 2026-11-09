@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "updated_at": "2026-11-09T07:53:10.332865+00:00",
+  "updated_at": "2026-11-09T10:58:21.901084+00:00",
   "pipeline": "Value-First Autonomous Engine",
   "summary": {
     "total_leads": 3,
@@ -43,8 +43,8 @@
       },
       "status": "OUTREACH_SENT",
       "pitch_file": "pitches/useshape-pitch.md",
-      "sent_at": "2026-11-09T07:52:52.244847+00:00",
-      "message_id": "<010001a1bf4bb35f-61e60d37-dc26-40fd-8fef-a77b0711d1e6-000000@email.amazonses.com>"
+      "sent_at": "2026-11-09T10:58:04.335426+00:00",
+      "message_id": "<010001a1bff541d6-fff904e1-1dd1-4b3b-98ba-e38f9dd51e9d-000000@email.amazonses.com>"
     },
     {
       "id": "lead-002",
@@ -76,8 +76,8 @@
       },
       "status": "OUTREACH_SENT",
       "pitch_file": "pitches/companion-core-pitch.md",
-      "sent_at": "2026-11-09T07:53:00.576924+00:00",
-      "message_id": "<010001a1bf4bd3aa-b5223490-8dac-4b71-8839-ba62f9d1c896-000000@email.amazonses.com>"
+      "sent_at": "2026-11-09T10:58:13.387350+00:00",
+      "message_id": "<010001a1bff564eb-ee21fb9e-5f37-4daa-98ab-97a8efdf19b4-000000@email.amazonses.com>"
     },
     {
       "id": "lead-003",
@@ -107,8 +107,8 @@
       },
       "status": "OUTREACH_SENT",
       "pitch_file": "pitches/zcad-ai-pitch.md",
-      "sent_at": "2026-11-09T07:53:10.332821+00:00",
-      "message_id": "<010001a1bf4bf9f3-42ffe3c6-670c-4621-b95d-51561e72759d-000000@email.amazonses.com>"
+      "sent_at": "2026-11-09T10:58:21.901028+00:00",
+      "message_id": "<010001a1bff58690-12a5ac2b-d552-49c5-9269-4c928e67e904-000000@email.amazonses.com>"
     }
   ]
 }

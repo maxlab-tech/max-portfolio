@@ -3,8 +3,8 @@ import json
 import subprocess
 from datetime import datetime, timezone
 
-API_KEY = "am_us_d54a074d70a33d63d1fd50ae86af2c58ab4a320638e9610533060ab59db045d3"
-INBOX_ID = "maxlabstudio@agentmail.to"
+API_KEY = os.environ.get("AGENTMAIL_API_KEY", "am_us_33725f1db714cbf4c379bd6f51dae3b37978333f6e9e1f0d75a4e96b18fe4f83")
+INBOX_ID = "maxlab.studio@agentmail.to"
 BASE_DIR = "/mnt/c/Users/Lenovo/Projects/max-portfolio/radar"
 LEADS_FILE = os.path.join(BASE_DIR, "leads.json")
 
