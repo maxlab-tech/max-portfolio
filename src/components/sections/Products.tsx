@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import RefractiveCrystalShowcase from "./RefractiveCrystalShowcase";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -29,20 +30,21 @@ const products: Product[] = [
     tagline: "Free Open-Source Micro Component",
     price: "$0",
     period: "Free forever • MIT License",
-    badge: "COMMUNITY STARTER",
+    badge: "COMMUNITY STARTER • LIVE PREVIEW",
     description:
-      "Interactive 3D card tilt with dynamic mouse-following specular shine, GLSL chromatic aberration, and buttery 60 FPS physics.",
+      "Interactive 3D crystal tilt with dynamic pointer specular shine, GLSL chromatic aberration at optical bias edges, and buttery 60 FPS physics.",
     features: [
-      "Vanilla Three.js + React Three Fiber variants",
-      "Sub-5KB lightweight asset footprint",
-      "Tailwind CSS v4 ready with custom tokens",
-      "Zero layout shift (CLS: 0.000)",
-      "MIT License — use in commercial or personal apps",
+      "PBR MeshPhysicalMaterial with IOR 1.45 transmission",
+      "onBeforeCompile GLSL chromatic dispersion hooks",
+      "Adaptive degradation guard (PBR to MatCap to CSS Glass)",
+      "Zero layout shift and locked 60 FPS performance",
+      "MIT License: use in commercial or personal apps",
     ],
     specs: [
-      { label: "Bundle", val: "< 5KB" },
+      { label: "Transmission", val: "0.5x Scale" },
       { label: "Target", val: "React / Next.js" },
-      { label: "FPS", val: "60–120 FPS" },
+      { label: "FPS", val: "60-120 FPS" },
+      { label: "Latency", val: "< 10ms GPU" },
     ],
     deliverables: "GitHub Repo & Code Snippet",
     actionText: "Get Free Component",
@@ -151,7 +153,7 @@ export default function Products() {
     <section ref={sectionRef} id="products" className="relative py-32 md:py-48 px-6 bg-background/50">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-16">
           <span className="inline-block px-4 py-1.5 rounded-full glass border-accent/30 text-accent text-sm font-medium mb-6">
             Digital Products & Vault
           </span>
@@ -163,6 +165,9 @@ export default function Products() {
             Zero canvas boilerplate, guaranteed 60–120 FPS, and sub-50KB bundle footprint.
           </p>
         </div>
+
+        {/* Live Interactive 3D Refractive Crystal Showcase */}
+        <RefractiveCrystalShowcase />
 
         {/* Product Cards Grid */}
         <div className="grid lg:grid-cols-3 gap-8 mb-20">

@@ -5,11 +5,12 @@ import { useRef, useEffect, useMemo } from "react";
 import * as THREE from "three";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { attachCrystalHook, createCrystalUniforms } from "./crystal/dispersionHook";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export function HeroScene() {
-  const { camera } = useThree();
+  const { camera, gl } = useThree();
   const scrollProgressRef = useRef(0);
   const timeRef = useRef(0);
   const meshRef = useRef<THREE.Group>(null);
@@ -18,24 +19,34 @@ export function HeroScene() {
   const shardsRef = useRef<THREE.InstancedMesh>(null);
   const shardCount = 60;
 
+  // Transmission resolution scale optimization (0.5x render target scale)
+  useEffect(() => {
+    gl.transmissionResolutionScale = 0.5;
+  }, [gl]);
+
   // Geometry & materials created once
   const geometry = useMemo(() => new THREE.IcosahedronGeometry(1.2, 8), []);
   const wireGeometry = useMemo(() => new THREE.IcosahedronGeometry(1.22, 8), []);
   
-  const material = useMemo(() => 
-    new THREE.MeshPhysicalMaterial({
+  const uniforms = useMemo(() => createCrystalUniforms(), []);
+  const material = useMemo(() => {
+    const mat = new THREE.MeshPhysicalMaterial({
       color: 0x00d4aa,
-      metalness: 0.3,
-      roughness: 0.4,
-      transmission: 0.3,
-      thickness: 0.5,
+      metalness: 0.2,
+      roughness: 0.25,
+      transmission: 0.65,
+      thickness: 0.8,
+      ior: 1.45,
+      dispersion: 0.05,
       transparent: true,
-      opacity: 0.15,
+      opacity: 0.85,
       clearcoat: 1,
-      clearcoatRoughness: 0.1,
+      clearcoatRoughness: 0.08,
       side: THREE.DoubleSide,
-    }), []
-  );
+    });
+    attachCrystalHook(mat, uniforms);
+    return mat;
+  }, [uniforms]);
 
   const wireMaterial = useMemo(() =>
     new THREE.MeshBasicMaterial({
@@ -192,8 +203,37 @@ export function HeroScene() {
     return () => ScrollTrigger.getAll().forEach(t => t.kill());
   }, []);
 
+  // Cleanup on unmount (zero memory leaks)
+  useEffect(() => {
+    return () => {
+      geometry.dispose();
+      wireGeometry.dispose();
+      material.dispose();
+      wireMaterial.dispose();
+      ringGeometry.dispose();
+      ringMaterial.dispose();
+      particleGeometry.dispose();
+      particleMaterial.dispose();
+      shardGeometry.dispose();
+      shardMaterial.dispose();
+    };
+  }, [
+    geometry,
+    wireGeometry,
+    material,
+    wireMaterial,
+    ringGeometry,
+    ringMaterial,
+    particleGeometry,
+    particleMaterial,
+    shardGeometry,
+    shardMaterial,
+  ]);
+
   // Animation loop - proper useFrame signature
   useFrame((state, delta) => {
+    uniforms.uTiltX.value = state.pointer.x;
+    uniforms.uTiltY.value = state.pointer.y;
     timeRef.current += delta;
     const t = timeRef.current;
     const scroll = scrollProgressRef.current;
