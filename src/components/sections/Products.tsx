@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import RefractiveCrystalShowcase from "./RefractiveCrystalShowcase";
+import DisplacementShowcase from "./DisplacementShowcase";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -61,13 +62,13 @@ const products: Product[] = [
     description:
       "Stop wrestling with canvas performance. 10+ production-grade Three.js components and GLSL shaders built specifically for high-conversion tech landing pages.",
     features: [
+      "Procedural Vertex Displacement with Analytical Normal Recalculation",
+      "Optical Refraction & Chromatic Dispersion Glass Core",
       "10+ Drop-in Three.js & GLSL components",
-      "Holographic Glass Card with chromatic rim light",
       "GPU Particle Wave reactive to cursor & touch",
       "Neural AI Connectivity Graph with node clustering",
-      "Dark Matter Ambient Shader Sphere",
-      "Audio-reactive frequency spectrum mesh",
       "Full TypeScript types, Tailwind v4 tokens & docs",
+      "Instant ZIP download + Private GitHub repo access",
       "Automatic reduced-motion and mobile fallback",
     ],
     specs: [
@@ -113,6 +114,7 @@ export default function Products() {
   const sectionRef = useRef<HTMLElement>(null);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [copiedFree, setCopiedFree] = useState(false);
+  const [activePreview, setActivePreview] = useState<"displacement" | "crystal">("displacement");
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -166,8 +168,38 @@ export default function Products() {
           </p>
         </div>
 
-        {/* Live Interactive 3D Refractive Crystal Showcase */}
-        <RefractiveCrystalShowcase />
+        {/* Interactive 3D Showcase Switcher Bar */}
+        <div className="flex items-center justify-center gap-3 mb-8">
+          <button
+            onClick={() => setActivePreview("displacement")}
+            className={`px-4 py-2 rounded-xl text-xs font-mono font-medium transition-all flex items-center gap-2 ${
+              activePreview === "displacement"
+                ? "bg-accent text-background font-semibold shadow-lg shadow-accent/25"
+                : "glass border border-border/60 text-muted-foreground hover:text-foreground hover:border-accent/40"
+            }`}
+          >
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+            <span>Interactive Shader Module ($29 Pack)</span>
+          </button>
+          <button
+            onClick={() => setActivePreview("crystal")}
+            className={`px-4 py-2 rounded-xl text-xs font-mono font-medium transition-all flex items-center gap-2 ${
+              activePreview === "crystal"
+                ? "bg-accent text-background font-semibold shadow-lg shadow-accent/25"
+                : "glass border border-border/60 text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <span className="w-2 h-2 rounded-full bg-purple-400" />
+            <span>Refractive Glass Module (Free Starter)</span>
+          </button>
+        </div>
+
+        {/* Live Interactive 3D Showcase */}
+        {activePreview === "displacement" ? (
+          <DisplacementShowcase />
+        ) : (
+          <RefractiveCrystalShowcase />
+        )}
 
         {/* Product Cards Grid */}
         <div className="grid lg:grid-cols-3 gap-8 mb-20">

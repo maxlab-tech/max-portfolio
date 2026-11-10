@@ -3,9 +3,10 @@
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import { TiltController } from "@/components/three/crystal/tiltController";
+import type { RefractiveCrystalCanvasProps } from "@/components/three/crystal/RefractiveCrystalCanvas";
 
 // Client-only dynamic import for the 3D Canvas
-const RefractiveCrystalCanvas = dynamic(
+const RefractiveCrystalCanvas = dynamic<RefractiveCrystalCanvasProps>(
   () => import("@/components/three/crystal/RefractiveCrystalCanvas"),
   {
     ssr: false,
